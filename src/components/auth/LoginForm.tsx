@@ -72,7 +72,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="w-full md:w-1/2 lg:w-1/2 flex items-center justify-center p-4 md:p-8 bg-gradient-to-br from-gray-50 to-gray-100">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

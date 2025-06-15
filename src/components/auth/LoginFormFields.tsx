@@ -41,7 +41,7 @@ export default function LoginFormFields({ form }: LoginFormFieldsProps) {
         name="password"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Şifre</FormLabel>
+            <FormLabel className="text-gray-800">Şifre</FormLabel>
             <FormControl>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
