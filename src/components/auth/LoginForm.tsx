@@ -59,7 +59,6 @@ export default function LoginForm() {
           title: 'Başarılı',
           description: 'Giriş yapıldı'
         })
-        // Navigation will be handled automatically by AuthProvider
       }
     } catch (error) {
       toast({
@@ -73,18 +72,18 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
-        <Card className="shadow-2xl border-0">
-          <CardHeader className="text-center pb-2">
-            <CardTitle className="text-2xl font-bold text-gray-800">
+        <Card className="shadow-xl border border-blue-100 bg-white/80 backdrop-blur-sm">
+          <CardHeader className="text-center pb-4">
+            <CardTitle className="text-2xl font-bold text-slate-800">
               Giriş Yap
             </CardTitle>
-            <p className="text-gray-600">Hesabınıza giriş yapın</p>
+            <p className="text-slate-600">Hesabınıza giriş yapın</p>
           </CardHeader>
           <CardContent className="space-y-4">
             <Form {...form}>
@@ -94,13 +93,13 @@ export default function LoginForm() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-slate-700 font-medium">Email</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                          <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
                           <Input
                             placeholder="email@example.com"
-                            className="pl-10"
+                            className="pl-10 border-slate-200 bg-white/70 text-slate-800 placeholder:text-slate-500 focus:border-blue-400 focus:ring-blue-400"
                             {...field}
                           />
                         </div>
@@ -115,20 +114,20 @@ export default function LoginForm() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Şifre</FormLabel>
+                      <FormLabel className="text-slate-700 font-medium">Şifre</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                          <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
                           <Input
                             type={showPassword ? 'text' : 'password'}
                             placeholder="Şifrenizi girin"
-                            className="pl-10 pr-10"
+                            className="pl-10 pr-10 border-slate-200 bg-white/70 text-slate-800 placeholder:text-slate-500 focus:border-blue-400 focus:ring-blue-400"
                             {...field}
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                            className="absolute right-3 top-3 text-slate-500 hover:text-slate-700 transition-colors"
                           >
                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                           </button>
@@ -149,9 +148,10 @@ export default function LoginForm() {
                           <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
+                            className="border-slate-300"
                           />
                         </FormControl>
-                        <FormLabel className="text-sm font-normal">
+                        <FormLabel className="text-sm font-normal text-slate-600">
                           Beni hatırla
                         </FormLabel>
                       </FormItem>
@@ -160,7 +160,7 @@ export default function LoginForm() {
 
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+                    className="text-sm text-blue-600 hover:text-blue-800 hover:underline transition-colors"
                   >
                     Şifremi unuttum
                   </Link>
@@ -168,7 +168,7 @@ export default function LoginForm() {
 
                 <Button
                   type="submit"
-                  className="w-full planmaster-button"
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-2.5 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -181,12 +181,12 @@ export default function LoginForm() {
               </form>
             </Form>
 
-            <div className="text-center pt-4 border-t">
-              <p className="text-sm text-gray-600">
+            <div className="text-center pt-4 border-t border-slate-200">
+              <p className="text-sm text-slate-600">
                 Hesabınız yok mu?{' '}
                 <Link
                   to="/register"
-                  className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
+                  className="text-blue-600 hover:text-blue-800 hover:underline font-medium transition-colors"
                 >
                   Kayıt olun
                 </Link>
