@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -13,7 +12,8 @@ import {
   FolderOpen,
   BarChart3,
   Repeat,
-  Sparkles
+  Sparkles,
+  LogOut
 } from 'lucide-react';
 import {
   Sidebar,
@@ -29,13 +29,26 @@ import {
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import QuickTaskInput from '../tasks/QuickTaskInput';
 import { useTasks } from '@/hooks/useTasks';
+import { useAuth } from '@/hooks/useAuth';
 
 const AppSidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { tasks } = useTasks();
+  const { signOut, user } = useAuth();
 
   // Calculate today's stats
   const todayStats = React.useMemo(() => {
@@ -50,6 +63,15 @@ const AppSidebar: React.FC = () => {
       remaining: todayTasks.filter(task => !task.completed).length
     };
   }, [tasks]);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate('/login');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   const menuItems = [
     {
@@ -215,7 +237,56 @@ const AppSidebar: React.FC = () => {
         </motion.div>
       </SidebarContent>
 
-      <SidebarFooter className="p-4 border-t border-white/10">
+      <SidebarFooter className="p-4 border-t border-white/10 space-y-3">
+        {/* User Info */}
+        {user && (
+          <div className="flex items-center space-x-3 px-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-sm font-semibold">
+                {user.email?.charAt(0).toUpperCase()}
+              </span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-white text-sm font-medium truncate">
+                {user.email}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Logout Button */}
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="ghost"
+              className="w-full justify-start text-red-300 hover:text-red-200 hover:bg-red-500/10 h-10 text-sm transition-colors border border-red-500/20 hover:border-red-500/40"
+            >
+              <LogOut className="h-4 w-4 mr-2" />
+              <span>Çıkış Yap</span>
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="bg-gray-900 border-white/15">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="text-white">Çıkış yapmak istediğinizden emin misiniz?</AlertDialogTitle>
+              <AlertDialogDescription className="text-white/70">
+                Bu işlem sizi uygulamadan çıkaracak ve giriş sayfasına yönlendirecektir.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel className="bg-white/10 text-white border-white/20 hover:bg-white/20">
+                İptal
+              </AlertDialogCancel>
+              <AlertDialogAction 
+                onClick={handleSignOut}
+                className="bg-red-600 hover:bg-red-700 text-white"
+              >
+                Çıkış Yap
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        {/* App Version */}
         <div className="text-sm text-white/50 text-center">
           <span className="gradient-text font-medium">PlanMaster Pro</span>
           <span className="block text-xs mt-1">v1.0</span>
