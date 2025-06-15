@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -11,7 +10,8 @@ import {
   Settings,
   Home,
   FolderOpen,
-  BarChart3
+  BarChart3,
+  Repeat
 } from 'lucide-react';
 import {
   Sidebar,
@@ -54,6 +54,11 @@ const AppSidebar: React.FC = () => {
       title: 'Dashboard',
       url: '/',
       icon: Home,
+    },
+    {
+      title: 'Tekrarlayan Görevler',
+      url: '/patterns',
+      icon: Repeat,
     },
     {
       title: 'Kategoriler',

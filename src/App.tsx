@@ -17,6 +17,7 @@ import ForgotPassword from '@/pages/ForgotPassword';
 import ResetPassword from '@/pages/ResetPassword';
 import Categories from '@/pages/Categories';
 import Calendar from '@/pages/Calendar';
+import Patterns from '@/pages/Patterns';
 import NotFound from '@/pages/NotFound';
 
 import './App.css';
@@ -66,6 +67,7 @@ function App() {
                     <AppLayout>
                       <Routes>
                         <Route path="/" element={<Index />} />
+                        <Route path="/patterns" element={<Patterns />} />
                         <Route path="/categories" element={<Categories />} />
                         <Route path="/calendar" element={<Calendar />} />
                         <Route path="*" element={<NotFound />} />
