@@ -42,6 +42,65 @@ export type Database = {
         }
         Relationships: []
       }
+      tasks: {
+        Row: {
+          actual_time: number | null
+          category_id: string
+          completed: boolean
+          created_at: string
+          description: string | null
+          due_date: string | null
+          estimated_time: number | null
+          id: string
+          notes: string | null
+          priority: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_time?: number | null
+          category_id: string
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          estimated_time?: number | null
+          id?: string
+          notes?: string | null
+          priority?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_time?: number | null
+          category_id?: string
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          estimated_time?: number | null
+          id?: string
+          notes?: string | null
+          priority?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

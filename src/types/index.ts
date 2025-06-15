@@ -48,3 +48,6 @@ export interface CalendarEvent {
 
 export type ViewMode = 'day' | 'week' | 'month';
 export type Priority = 'low' | 'medium' | 'high';
+
+// Re-export from task types
+export type { Task as TaskType, CreateTaskData, UpdateTaskData, TaskFilters, TaskSort } from './task';
