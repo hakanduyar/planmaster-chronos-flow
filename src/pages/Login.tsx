@@ -5,7 +5,7 @@ import LoginForm from '@/components/auth/LoginForm'
 
 export default function Login() {
   return (
-    <div className="min-h-screen flex w-full">
+    <div className="min-h-screen flex w-full overflow-hidden">
       <LoginWelcome />
       <LoginForm />
     </div>
