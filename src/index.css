@@ -73,6 +73,18 @@
   }
 
   .planmaster-button {
-    @apply bg-gradient-button text-white px-6 py-3 rounded-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl;
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+
+  .bg-gradient-planmaster {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .bg-gradient-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  }
+
+  .bg-gradient-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   }
 }
