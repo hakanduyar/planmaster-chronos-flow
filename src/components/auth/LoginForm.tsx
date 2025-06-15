@@ -73,23 +73,20 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
+    <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gradient-to-br from-gray-50 to-gray-100">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md mx-auto"
+        className="w-full max-w-md"
       >
-        <Card className="shadow-xl border-0 bg-white/95 backdrop-blur-sm">
-          <CardHeader className="text-center pb-4 pt-6">
-            <div className="mx-auto w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-4">
-              <LogIn className="w-7 h-7 text-white" />
-            </div>
-            <CardTitle className="text-2xl font-bold text-slate-800">
-              Hoş Geldiniz
+        <Card className="shadow-2xl border-0">
+          <CardHeader className="text-center pb-2">
+            <CardTitle className="text-2xl font-bold text-gray-800">
+              Giriş Yap
             </CardTitle>
-            <p className="text-slate-600 mt-2 text-sm">Hesabınıza giriş yapın ve planlamaya başlayın</p>
+            <p className="text-gray-600">Hesabınıza giriş yapın</p>
           </CardHeader>
-          <CardContent className="space-y-5 px-6 pb-6">
+          <CardContent className="space-y-4">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
@@ -97,13 +94,13 @@ export default function LoginForm() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-medium text-sm">Email Adresi</FormLabel>
+                      <FormLabel>Email</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                           <Input
-                            placeholder="ornek@email.com"
-                            className="pl-10 h-11 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 bg-white text-slate-700"
+                            placeholder="email@example.com"
+                            className="pl-10"
                             {...field}
                           />
                         </div>
@@ -118,20 +115,20 @@ export default function LoginForm() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-medium text-sm">Şifre</FormLabel>
+                      <FormLabel>Şifre</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                          <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                           <Input
                             type={showPassword ? 'text' : 'password'}
                             placeholder="Şifrenizi girin"
-                            className="pl-10 pr-11 h-11 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20 bg-white text-slate-700"
+                            className="pl-10 pr-10"
                             {...field}
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                            className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
                           >
                             {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                           </button>
@@ -142,7 +139,7 @@ export default function LoginForm() {
                   )}
                 />
 
-                <div className="flex items-center justify-between pt-2">
+                <div className="flex items-center justify-between">
                   <FormField
                     control={form.control}
                     name="rememberMe"
@@ -152,10 +149,9 @@ export default function LoginForm() {
                           <Checkbox
                             checked={field.value}
                             onCheckedChange={field.onChange}
-                            className="border-slate-300"
                           />
                         </FormControl>
-                        <FormLabel className="text-sm font-normal text-slate-600">
+                        <FormLabel className="text-sm font-normal">
                           Beni hatırla
                         </FormLabel>
                       </FormItem>
@@ -164,7 +160,7 @@ export default function LoginForm() {
 
                   <Link
                     to="/forgot-password"
-                    className="text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium"
+                    className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
                   >
                     Şifremi unuttum
                   </Link>
@@ -172,7 +168,7 @@ export default function LoginForm() {
 
                 <Button
                   type="submit"
-                  className="w-full h-11 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 mt-6"
+                  className="w-full planmaster-button"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -185,14 +181,14 @@ export default function LoginForm() {
               </form>
             </Form>
 
-            <div className="text-center pt-4 border-t border-slate-100">
-              <p className="text-sm text-slate-600">
+            <div className="text-center pt-4 border-t">
+              <p className="text-sm text-gray-600">
                 Hesabınız yok mu?{' '}
                 <Link
                   to="/register"
                   className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
                 >
-                  Ücretsiz kayıt olun
+                  Kayıt olun
                 </Link>
               </p>
             </div>

@@ -16,15 +16,15 @@ export default function LoginWelcome() {
         </p>
         <div className="grid grid-cols-1 gap-4 mt-8">
           <div className="glass-card p-4">
-            <h3 className="font-semibold text-white">📋 Akıllı Görev Yönetimi</h3>
+            <h3 className="font-semibold">📋 Akıllı Görev Yönetimi</h3>
             <p className="text-sm text-blue-100">Görevlerinizi kategorilere ayırın ve öncelik verin</p>
           </div>
           <div className="glass-card p-4">
-            <h3 className="font-semibold text-white">📊 İlerme Takibi</h3>
+            <h3 className="font-semibold">📊 İlerme Takibi</h3>
             <p className="text-sm text-blue-100">Detaylı istatistikler ve grafiklerle ilerlemenizi izleyin</p>
           </div>
           <div className="glass-card p-4">
-            <h3 className="font-semibold text-white">🗓️ Takvim Entegrasyonu</h3>
+            <h3 className="font-semibold">🗓️ Takvim Entegrasyonu</h3>
             <p className="text-sm text-blue-100">Tüm planlarınızı tek bir yerden yönetin</p>
           </div>
         </div>
