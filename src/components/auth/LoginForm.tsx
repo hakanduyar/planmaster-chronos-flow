@@ -84,7 +84,7 @@ export default function LoginForm() {
             <CardTitle className="text-2xl font-bold text-gray-800">
               Giriş Yap
             </CardTitle>
-            <p className="text-gray-600">Hesabınıza giriş yapın</p>
+            <p className="text-gray-800">Hesabınıza giriş yapın</p>
           </CardHeader>
           <CardContent className="space-y-4">
             <Form {...form}>
@@ -182,7 +182,7 @@ export default function LoginForm() {
             </Form>
 
             <div className="text-center pt-4 border-t">
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-800">
                 Hesabınız yok mu?{' '}
                 <Link
                   to="/register"
