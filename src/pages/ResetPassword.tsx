@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { useToast } from '@/hooks/use-toast'
-import { useAuth } from '@/contexts/AuthContext'
+import { useAuth } from '@/hooks/useAuth'
 import { resetPasswordSchema, ResetPasswordFormData } from '@/lib/validations'
 import { validatePassword } from '@/utils/passwordUtils'
 

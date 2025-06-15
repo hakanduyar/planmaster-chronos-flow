@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -10,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { useToast } from '@/hooks/use-toast'
-import { useAuth } from '@/contexts/AuthContext'
+import { useAuth } from '@/hooks/useAuth'
 import { forgotPasswordSchema, ForgotPasswordFormData } from '@/lib/validations'
 
 export default function ForgotPassword() {
