@@ -84,7 +84,7 @@ export default function LoginForm() {
             <CardTitle className="text-2xl font-bold text-gray-800">
               Giriş Yap
             </CardTitle>
-            <p className="text-gray-900">Hesabınıza giriş yapın</p>
+            <p className="text-gray-800">Hesabınıza giriş yapın</p>
           </CardHeader>
           <CardContent className="space-y-4">
             <Form {...form}>
@@ -94,7 +94,7 @@ export default function LoginForm() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-900">Email</FormLabel>
+                      <FormLabel className="text-gray-800">Email</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
@@ -182,7 +182,7 @@ export default function LoginForm() {
             </Form>
 
             <div className="text-center pt-4 border-t">
-              <p className="text-sm text-gray-900">
+              <p className="text-sm text-gray-800">
                 Hesabınız yok mu?{' '}
                 <Link
                   to="/register"
