@@ -147,7 +147,7 @@
 
   /* Enhanced stat card styling */
   .stat-card {
-    @apply glass-card hover:bg-white/10 transition-all duration-300 transform hover:scale-102;
+    @apply glass-card hover:bg-white/10 transition-all duration-300 transform hover:scale-105;
   }
 
   /* Enhanced dashboard layout */
