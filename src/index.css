@@ -3,46 +3,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Modern, açık tema için yeniden tasarlanmış design system */
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Açık tema renk paleti */
+    --background: 255 255 255; /* Pure white */
+    --foreground: 30 41 59; /* Slate-800 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 255 255 255; /* White */
+    --card-foreground: 30 41 59; /* Slate-800 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 255 255 255; /* White */
+    --popover-foreground: 30 41 59; /* Slate-800 */
 
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 59 130 246; /* Blue-500 */
+    --primary-foreground: 255 255 255; /* White */
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
+    --secondary: 241 245 249; /* Slate-100 */
+    --secondary-foreground: 15 23 42; /* Slate-900 */
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 248 250 252; /* Slate-50 */
+    --muted-foreground: 100 116 139; /* Slate-500 */
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --accent: 239 246 255; /* Blue-50 */
+    --accent-foreground: 30 58 138; /* Blue-900 */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 239 68 68; /* Red-500 */
+    --destructive-foreground: 255 255 255; /* White */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --border: 226 232 240; /* Slate-200 */
+    --input: 226 232 240; /* Slate-200 */
+    --ring: 59 130 246; /* Blue-500 */
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 222.2 84% 4.9%;
-    --sidebar-primary: 221.2 83.2% 53.3%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 210 40% 96%;
-    --sidebar-accent-foreground: 222.2 84% 4.9%;
-    --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 221.2 83.2% 53.3%;
+    --sidebar-background: 248 250 252; /* Slate-50 */
+    --sidebar-foreground: 30 41 59; /* Slate-800 */
+    --sidebar-primary: 59 130 246; /* Blue-500 */
+    --sidebar-primary-foreground: 255 255 255; /* White */
+    --sidebar-accent: 241 245 249; /* Slate-100 */
+    --sidebar-accent-foreground: 30 41 59; /* Slate-800 */
+    --sidebar-border: 226 232 240; /* Slate-200 */
+    --sidebar-ring: 59 130 246; /* Blue-500 */
 
-    --radius: 0.5rem;
+    --radius: 0.75rem; /* Increased for modern look */
   }
 }
 
@@ -53,108 +56,110 @@
 
   html {
     font-size: 16px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
   body {
-    @apply bg-gradient-planmaster text-foreground;
+    @apply bg-gradient-modern text-foreground;
     min-height: 100vh;
     font-size: 1rem;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.6;
   }
 
+  /* Modern scrollbar styling */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(148, 163, 184, 0.1);
-    border-radius: 4px;
+    background: rgb(248 250 252);
+    border-radius: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(148, 163, 184, 0.3);
-    border-radius: 4px;
-    border: 1px solid rgba(148, 163, 184, 0.1);
+    background: rgb(203 213 225);
+    border-radius: 8px;
+    border: 1px solid rgb(241 245 249);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(148, 163, 184, 0.5);
+    background: rgb(148 163 184);
   }
 
   ::-webkit-scrollbar-corner {
-    background: rgba(148, 163, 184, 0.1);
-  }
-
-  [data-sidebar="sidebar"] {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  [data-sidebar="sidebar"]::-webkit-scrollbar {
-    display: none;
+    background: rgb(248 250 252);
   }
 }
 
 @layer components {
+  /* Modern glass effect */
   .glass-card {
     background: rgba(255, 255, 255, 0.95);
-    @apply backdrop-blur-sm border border-slate-200/60 rounded-xl shadow-sm;
+    @apply backdrop-blur-sm border border-slate-200/60 rounded-xl shadow-lg;
   }
   
+  /* Modern gradient text */
   .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent;
   }
 
+  /* Task card styling */
   .task-card {
-    @apply bg-white/95 backdrop-blur-sm border border-slate-200/60 rounded-xl p-5 hover:border-slate-300/80 transition-all duration-300 shadow-sm hover:shadow-md;
+    @apply bg-white backdrop-blur-sm border border-slate-200 rounded-xl p-6 hover:border-blue-300 hover:shadow-lg transition-all duration-300;
   }
 
+  /* Modern button styling */
   .planmaster-button {
-    @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105;
+    @apply bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg transition-all duration-200;
   }
 
-  .bg-gradient-planmaster {
+  /* Modern gradient backgrounds */
+  .bg-gradient-modern {
     background: linear-gradient(135deg, 
       #f8fafc 0%, 
-      #e2e8f0 25%, 
-      #cbd5e1 50%, 
-      #94a3b8 75%, 
-      #64748b 100%
+      #f1f5f9 25%, 
+      #e2e8f0 50%, 
+      #f0f9ff 75%, 
+      #dbeafe 100%
     );
   }
 
   .bg-gradient-card {
     background: linear-gradient(135deg, 
       rgba(255,255,255,0.95) 0%, 
-      rgba(255,255,255,0.9) 50%, 
-      rgba(255,255,255,0.85) 100%
+      rgba(248,250,252,0.9) 50%, 
+      rgba(241,245,249,0.95) 100%
     );
   }
 
   .bg-gradient-button {
     background: linear-gradient(135deg, 
       #3b82f6 0%, 
-      #1d4ed8 100%
+      #6366f1 50%, 
+      #8b5cf6 100%
     );
   }
 
+  /* Modern stat card styling */
   .stat-card {
-    @apply glass-card hover:bg-white/98 transition-all duration-300 transform hover:scale-105 hover:shadow-lg;
+    @apply bg-white/95 backdrop-blur-sm border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-blue-300 transition-all duration-300;
   }
 
+  /* Dashboard container */
   .dashboard-container {
     @apply h-full overflow-y-auto;
     scrollbar-width: thin;
-    scrollbar-color: rgba(148, 163, 184, 0.3) rgba(148, 163, 184, 0.1);
+    scrollbar-color: rgb(203 213 225) rgb(248 250 252);
   }
 
+  /* Modern typography */
   .heading-large {
-    @apply text-3xl font-bold text-slate-800;
+    @apply text-3xl font-bold text-slate-900;
   }
 
   .heading-medium {
-    @apply text-xl font-semibold text-slate-700;
+    @apply text-xl font-semibold text-slate-800;
   }
 
   .heading-small {
@@ -173,17 +178,27 @@
     @apply text-xs text-slate-400;
   }
 
-  .neumorphism {
-    background: #f8fafc;
-    box-shadow: 
-      8px 8px 16px rgba(148, 163, 184, 0.2),
-      -8px -8px 16px rgba(255, 255, 255, 0.8);
+  /* Modern sidebar styling */
+  .sidebar-modern {
+    @apply bg-white/95 backdrop-blur-sm border-r border-slate-200;
   }
 
-  .neumorphism-inset {
-    background: #f8fafc;
-    box-shadow: 
-      inset 4px 4px 8px rgba(148, 163, 184, 0.2),
-      inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  /* Modern navigation items */
+  .nav-item {
+    @apply text-slate-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200;
+  }
+
+  .nav-item.active {
+    @apply text-blue-600 bg-blue-50 border-r-2 border-blue-600;
+  }
+
+  /* Modern card hover effects */
+  .hover-lift {
+    @apply hover:shadow-xl hover:-translate-y-1 transition-all duration-300;
+  }
+
+  /* Modern focus styles */
+  .focus-modern {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
   }
 }
