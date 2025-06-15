@@ -2,268 +2,126 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Button } from '@/components/ui/button';
-import { Plus, Calendar, CheckCircle, Clock, AlertCircle, TrendingUp, Settings, List } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { mockTasks, mockCategories, getMockStats } from '@/lib/mockData';
-import { DashboardStats } from '@/types';
-import DashboardSidebar from './DashboardSidebar';
-import TaskList from '@/components/tasks/TaskList';
+import { CheckCircle, Clock, Calendar, TrendingUp } from 'lucide-react';
+import { Task as DatabaseTask } from '@/types/task';
 import { useTasks } from '@/hooks/useTasks';
-import { useState } from 'react';
+import TaskList from '../tasks/TaskList';
 
-const Dashboard = () => {
-  const navigate = useNavigate();
-  const [showTaskList, setShowTaskList] = useState(false);
+const Dashboard: React.FC = () => {
   const { tasks, isLoading } = useTasks();
-  
-  // Use real tasks if available, fallback to mock data
-  const displayTasks = tasks.length > 0 ? tasks : mockTasks;
-  const stats = getMockStats(displayTasks);
-  const completionRate = stats.totalTasks > 0 ? Math.round((stats.completedTasks / stats.totalTasks) * 100) : 0;
 
-  const statCards = [
-    { title: 'Toplam Görev', value: stats.totalTasks, icon: CheckCircle, color: 'text-blue-400' },
-    { title: 'Tamamlanan', value: stats.completedTasks, icon: CheckCircle, color: 'text-green-400' },
-    { title: 'Bekleyen', value: stats.pendingTasks, icon: Clock, color: 'text-yellow-400' },
-    { title: 'Geciken', value: stats.overdueTasks, icon: AlertCircle, color: 'text-red-400' },
+  // Calculate stats from tasks
+  const stats = React.useMemo(() => {
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(task => task.completed).length;
+    const pendingTasks = tasks.filter(task => !task.completed).length;
+    const todayTasks = tasks.filter(task => 
+      task.due_date && task.due_date.startsWith(todayStr)
+    ).length;
+    const overdueTasks = tasks.filter(task => 
+      !task.completed && task.due_date && new Date(task.due_date) < today
+    ).length;
+
+    return {
+      totalTasks,
+      completedTasks,
+      pendingTasks,
+      todayTasks,
+      overdueTasks,
+      completionRate: totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0
+    };
+  }, [tasks]);
+
+  const statsCards = [
+    {
+      title: 'Toplam Görev',
+      value: stats.totalTasks,
+      icon: <Calendar className="h-6 w-6 text-blue-400" />,
+      color: 'from-blue-500/20 to-blue-600/20'
+    },
+    {
+      title: 'Tamamlanan',
+      value: stats.completedTasks,
+      icon: <CheckCircle className="h-6 w-6 text-green-400" />,
+      color: 'from-green-500/20 to-green-600/20'
+    },
+    {
+      title: 'Bekleyen',
+      value: stats.pendingTasks,
+      icon: <Clock className="h-6 w-6 text-yellow-400" />,
+      color: 'from-yellow-500/20 to-yellow-600/20'
+    },
+    {
+      title: 'Başarı Oranı',
+      value: `${stats.completionRate}%`,
+      icon: <TrendingUp className="h-6 w-6 text-purple-400" />,
+      color: 'from-purple-500/20 to-purple-600/20'
+    }
   ];
 
-  if (showTaskList) {
+  if (isLoading) {
     return (
-      <div className="min-h-screen p-6">
-        <div className="flex justify-between items-center mb-6">
-          <Button
-            onClick={() => setShowTaskList(false)}
-            variant="outline"
-            className="border-white/20 text-white hover:bg-white/10"
-          >
-            ← Dashboard'a Dön
-          </Button>
-        </div>
-        <TaskList />
+      <div className="flex items-center justify-center h-64">
+        <div className="text-white">Dashboard yükleniyor...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Sidebar */}
-        <div className="lg:col-span-1">
-          <DashboardSidebar />
-        </div>
+    <div className="space-y-8 p-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
+        <p className="text-white/70">Görev durumun ve istatistiklerin</p>
+      </div>
 
-        {/* Main Content */}
-        <div className="lg:col-span-3 space-y-8">
-          {/* Header Section */}
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {statsCards.map((stat, index) => (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex justify-between items-center"
-          >
-            <div>
-              <h1 className="text-4xl font-bold gradient-text mb-2">PlanMaster Pro</h1>
-              <p className="text-white/70 text-lg">Günlük planlarınızı takip edin ve hedeflerinize ulaşın</p>
-            </div>
-            <div className="flex space-x-3">
-              <Button 
-                onClick={() => setShowTaskList(true)}
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10"
-              >
-                <List className="w-5 h-5 mr-2" />
-                Tüm Görevler
-              </Button>
-              <Button 
-                onClick={() => navigate('/categories')}
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10"
-              >
-                <Settings className="w-5 h-5 mr-2" />
-                Kategoriler
-              </Button>
-            </div>
-          </motion.div>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {statCards.map((stat, index) => (
-              <motion.div
-                key={stat.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="glass-card hover:scale-105 transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-white/70 text-sm font-medium">{stat.title}</p>
-                        <p className="text-3xl font-bold text-white mt-2">{stat.value}</p>
-                      </div>
-                      <stat.icon className={`w-8 h-8 ${stat.color}`} />
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Progress Overview */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <Card className="glass-card">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center">
-                    <TrendingUp className="w-5 h-5 mr-2 text-green-400" />
-                    İlerleme Özeti
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-white/80">Tamamlanma Oranı</span>
-                      <span className="text-white font-semibold">{completionRate}%</span>
-                    </div>
-                    <Progress value={completionRate} className="h-3" />
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80">Bugün</span>
-                      <span className="text-blue-400 font-semibold">{stats.todayTasks} görev</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80">Bu Hafta</span>
-                      <span className="text-green-400 font-semibold">{stats.weekTasks} görev</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80">Bu Ay</span>
-                      <span className="text-purple-400 font-semibold">{stats.monthTasks} görev</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Recent Tasks */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Card className="glass-card">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center justify-between">
-                    <div className="flex items-center">
-                      <Calendar className="w-5 h-5 mr-2 text-blue-400" />
-                      Son Görevler
-                    </div>
-                    <Button
-                      onClick={() => setShowTaskList(true)}
-                      variant="ghost"
-                      size="sm"
-                      className="text-white/70 hover:text-white hover:bg-white/10"
-                    >
-                      Tümünü Gör
-                    </Button>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {displayTasks.slice(0, 5).map((task, index) => (
-                      <motion.div
-                        key={task.id}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                        className="task-card group cursor-pointer"
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3">
-                            <div className={`w-3 h-3 rounded-full ${task.completed ? 'bg-green-400' : 'bg-yellow-400'}`} />
-                            <div>
-                              <h3 className={`font-semibold ${task.completed ? 'line-through text-white/60' : 'text-white'}`}>
-                                {task.title}
-                              </h3>
-                              <p className="text-white/60 text-sm">{task.category.name}</p>
-                            </div>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              task.priority === 'high' ? 'bg-red-500/20 text-red-400' :
-                              task.priority === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
-                              'bg-green-500/20 text-green-400'
-                            }`}>
-                              {task.priority === 'high' ? 'Yüksek' : task.priority === 'medium' ? 'Orta' : 'Düşük'}
-                            </span>
-                            <span className="text-white/50 text-sm">
-                              {task.dueDate ? new Date(task.dueDate).toLocaleDateString('tr-TR') : ''}
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
-
-          {/* Categories Overview */}
-          <motion.div
+            key={stat.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: index * 0.1 }}
           >
-            <Card className="glass-card">
-              <CardHeader>
-                <CardTitle className="text-white">Kategoriler</CardTitle>
+            <Card className={`glass-card bg-gradient-to-br ${stat.color}`}>
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium text-white/80">
+                  {stat.title}
+                </CardTitle>
+                {stat.icon}
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                  {mockCategories.map((category, index) => {
-                    const categoryTasks = displayTasks.filter(t => t.category.id === category.id);
-                    const completedCount = categoryTasks.filter(t => t.completed).length;
-                    
-                    return (
-                      <motion.div
-                        key={category.id}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.7 + index * 0.1 }}
-                        className="task-card text-center group cursor-pointer hover:scale-105"
-                      >
-                        <div className="text-2xl mb-2">{category.icon}</div>
-                        <h3 className="font-semibold text-white mb-1">{category.name}</h3>
-                        <p className="text-white/60 text-sm">
-                          {completedCount}/{categoryTasks.length} tamamlandı
-                        </p>
-                        <div className="w-full bg-white/10 rounded-full h-2 mt-2">
-                          <div
-                            className="h-2 rounded-full transition-all duration-300"
-                            style={{
-                              width: `${categoryTasks.length > 0 ? (completedCount / categoryTasks.length) * 100 : 0}%`,
-                              backgroundColor: category.color
-                            }}
-                          />
-                        </div>
-                      </motion.div>
-                    );
-                  })}
+                <div className="text-3xl font-bold text-white">
+                  {stat.value}
                 </div>
               </CardContent>
             </Card>
           </motion.div>
-        </div>
+        ))}
       </div>
+
+      {/* Quick Insights */}
+      {stats.overdueTasks > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-red-500/20 border border-red-500/30 rounded-lg p-4"
+        >
+          <div className="flex items-center space-x-2 text-red-400">
+            <Clock className="h-5 w-5" />
+            <span className="font-semibold">
+              {stats.overdueTasks} görevin süresi geçmiş!
+            </span>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Task List */}
+      <TaskList />
     </div>
   );
 };

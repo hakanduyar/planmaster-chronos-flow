@@ -1,4 +1,6 @@
 
+import { Task as TaskFromTask } from './task';
+
 export interface Task {
   id: string;
   title: string;
@@ -49,5 +51,15 @@ export interface CalendarEvent {
 export type ViewMode = 'day' | 'week' | 'month';
 export type Priority = 'low' | 'medium' | 'high';
 
-// Re-export from task types
-export type { Task as TaskType, CreateTaskData, UpdateTaskData, TaskFilters, TaskSort } from './task';
+// Re-export task types with new aliases to avoid conflicts
+export type { 
+  Task as DatabaseTask, 
+  CreateTaskData, 
+  UpdateTaskData, 
+  TaskFilters, 
+  TaskSort,
+  TaskPriority,
+  TaskStatus,
+  TaskSortBy,
+  TaskSortOrder
+} from './task';
