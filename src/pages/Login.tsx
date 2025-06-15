@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
@@ -19,7 +19,6 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const { signIn } = useAuth()
   const { toast } = useToast()
-  const navigate = useNavigate()
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -60,7 +59,7 @@ export default function Login() {
           title: 'Başarılı',
           description: 'Giriş yapıldı'
         })
-        navigate('/dashboard')
+        // Navigation will be handled automatically by AuthProvider
       }
     } catch (error) {
       toast({
