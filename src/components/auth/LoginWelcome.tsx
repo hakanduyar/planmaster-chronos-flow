@@ -11,21 +11,21 @@ export default function LoginWelcome() {
     >
       <div className="text-white text-center space-y-6">
         <h1 className="text-5xl font-bold mb-4 text-white">PlanMaster Pro</h1>
-        <p className="text-xl text-blue-100 max-w-md">
+        <p className="text-xl text-white max-w-md">
           Günlük planlarınızı takip edin, hedeflerinize ulaşın ve verimliliğinizi artırın.
         </p>
         <div className="grid grid-cols-1 gap-4 mt-8">
           <div className="glass-card p-4">
             <h3 className="font-semibold text-white">📋 Akıllı Görev Yönetimi</h3>
-            <p className="text-sm text-blue-100">Görevlerinizi kategorilere ayırın ve öncelik verin</p>
+            <p className="text-sm text-white/90">Görevlerinizi kategorilere ayırın ve öncelik verin</p>
           </div>
           <div className="glass-card p-4">
             <h3 className="font-semibold text-white">📊 İlerme Takibi</h3>
-            <p className="text-sm text-blue-100">Detaylı istatistikler ve grafiklerle ilerlemenizi izleyin</p>
+            <p className="text-sm text-white/90">Detaylı istatistikler ve grafiklerle ilerlemenizi izleyin</p>
           </div>
           <div className="glass-card p-4">
             <h3 className="font-semibold text-white">🗓️ Takvim Entegrasyonu</h3>
-            <p className="text-sm text-blue-100">Tüm planlarınızı tek bir yerden yönetin</p>
+            <p className="text-sm text-white/90">Tüm planlarınızı tek bir yerden yönetin</p>
           </div>
         </div>
       </div>
