@@ -6,9 +6,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { CheckCircle, Clock, Search, Filter, MoreVertical } from 'lucide-react';
+import { CheckCircle, Clock, Search, Filter, MoreVertical, Edit, Trash2 } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useTasks } from '@/hooks/useTasks';
 import { Task, TaskFilters } from '@/types/task';
+import TaskModal from './TaskModal';
 
 const TaskList: React.FC = () => {
   const [filters, setFilters] = useState<TaskFilters>({
@@ -18,7 +20,8 @@ const TaskList: React.FC = () => {
     search: '',
   });
 
-  const { tasks, isLoading, toggleTask } = useTasks(filters);
+  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const { tasks, isLoading, toggleTask, deleteTask } = useTasks(filters);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters(prev => ({ ...prev, search: e.target.value }));
@@ -26,6 +29,16 @@ const TaskList: React.FC = () => {
 
   const handleStatusFilter = (status: string) => {
     setFilters(prev => ({ ...prev, status: status as TaskFilters['status'] }));
+  };
+
+  const handleEditTask = (task: Task) => {
+    setEditingTask(task);
+  };
+
+  const handleDeleteTask = (taskId: string) => {
+    if (confirm('Bu görevi silmek istediğinizden emin misiniz?')) {
+      deleteTask(taskId);
+    }
   };
 
   const getPriorityColor = (priority: string) => {
@@ -154,9 +167,29 @@ const TaskList: React.FC = () => {
                       </div>
                     </div>
                     
-                    <Button variant="ghost" size="sm" className="p-1 h-8 w-8">
-                      <MoreVertical className="h-4 w-4 text-white/60" />
-                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="sm" className="p-1 h-8 w-8">
+                          <MoreVertical className="h-4 w-4 text-white/60" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="bg-gray-900 border-white/20">
+                        <DropdownMenuItem 
+                          onClick={() => handleEditTask(task)}
+                          className="text-white hover:bg-white/10 cursor-pointer"
+                        >
+                          <Edit className="h-4 w-4 mr-2" />
+                          Düzenle
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={() => handleDeleteTask(task.id)}
+                          className="text-red-400 hover:bg-red-500/10 cursor-pointer"
+                        >
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Sil
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </CardContent>
               </Card>
@@ -164,6 +197,13 @@ const TaskList: React.FC = () => {
           ))
         )}
       </div>
+
+      {/* Edit Task Modal */}
+      <TaskModal
+        isOpen={!!editingTask}
+        onClose={() => setEditingTask(null)}
+        task={editingTask}
+      />
     </div>
   );
 };
