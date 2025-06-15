@@ -80,10 +80,10 @@ export default function LoginForm() {
       >
         <Card className="shadow-xl border border-blue-100 bg-white/80 backdrop-blur-sm">
           <CardHeader className="text-center pb-4">
-            <CardTitle className="text-2xl font-bold text-slate-800">
+            <CardTitle className="text-2xl font-bold text-slate-900">
               Giriş Yap
             </CardTitle>
-            <p className="text-slate-600">Hesabınıza giriş yapın</p>
+            <p className="text-slate-700">Hesabınıza giriş yapın</p>
           </CardHeader>
           <CardContent className="space-y-4">
             <Form {...form}>
@@ -93,7 +93,7 @@ export default function LoginForm() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-medium">Email</FormLabel>
+                      <FormLabel className="text-slate-900 font-medium">Email</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
@@ -114,7 +114,7 @@ export default function LoginForm() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 font-medium">Şifre</FormLabel>
+                      <FormLabel className="text-slate-900 font-medium">Şifre</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-500" />
@@ -151,7 +151,7 @@ export default function LoginForm() {
                             className="border-slate-300"
                           />
                         </FormControl>
-                        <FormLabel className="text-sm font-normal text-slate-600">
+                        <FormLabel className="text-sm font-normal text-slate-700">
                           Beni hatırla
                         </FormLabel>
                       </FormItem>
@@ -182,7 +182,7 @@ export default function LoginForm() {
             </Form>
 
             <div className="text-center pt-4 border-t border-slate-200">
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-slate-700">
                 Hesabınız yok mu?{' '}
                 <Link
                   to="/register"
