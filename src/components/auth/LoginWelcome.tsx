@@ -30,7 +30,9 @@ export default function LoginWelcome() {
   return (
     <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 p-12 flex-col justify-center relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.1"%3E%3Ccircle cx="7" cy="7" r="1"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+      <div className="absolute inset-0 opacity-20" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      }}></div>
       
       <motion.div
         initial={{ opacity: 0, x: -20 }}
@@ -42,9 +44,9 @@ export default function LoginWelcome() {
           <h1 className="text-4xl font-bold text-white mb-4 leading-tight">
             PlanMaster Pro'ya
             <br />
-            <span className="text-blue-200">Hoş Geldiniz</span>
+            <span className="text-blue-100">Hoş Geldiniz</span>
           </h1>
-          <p className="text-blue-100 text-lg leading-relaxed">
+          <p className="text-blue-50 text-lg leading-relaxed">
             Görevlerinizi organize edin, projelerinizi takip edin ve
             ekibinizle daha verimli çalışın. Modern iş yönetimi 
             çözümünüz burada.
@@ -67,7 +69,7 @@ export default function LoginWelcome() {
                 <h3 className="font-semibold text-white mb-1">
                   {feature.title}
                 </h3>
-                <p className="text-blue-100 text-sm leading-relaxed">
+                <p className="text-blue-50 text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -85,7 +87,7 @@ export default function LoginWelcome() {
             "PlanMaster Pro sayesinde takım verimliliğimiz %40 arttı. 
             Artık hiçbir görev gözden kaçmıyor!"
           </blockquote>
-          <cite className="text-blue-200 text-sm mt-2 block font-medium">
+          <cite className="text-blue-100 text-sm mt-2 block font-medium">
             — Ahmet Yılmaz, Proje Yöneticisi
           </cite>
         </motion.div>
