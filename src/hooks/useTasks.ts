@@ -192,27 +192,43 @@ export const useTasks = (filters?: TaskFilters, sort?: TaskSort) => {
     },
   });
 
-  // Real-time subscription
+  // Real-time subscription - sadece bir kez subscribe ol
   useEffect(() => {
-    const channel = supabase
-      .channel('tasks-changes')
-      .on(
-        'postgres_changes',
-        {
-          event: '*',
-          schema: 'public',
-          table: 'tasks'
-        },
-        () => {
-          queryClient.invalidateQueries({ queryKey: ['tasks'] });
-        }
-      )
-      .subscribe();
+    let channel: any = null;
+
+    const setupRealtimeSubscription = async () => {
+      try {
+        channel = supabase
+          .channel(`tasks-changes-${Math.random()}`) // Her hook instance için unique channel name
+          .on(
+            'postgres_changes',
+            {
+              event: '*',
+              schema: 'public',
+              table: 'tasks'
+            },
+            () => {
+              console.log('Tasks table changed, invalidating queries');
+              queryClient.invalidateQueries({ queryKey: ['tasks'] });
+            }
+          )
+          .subscribe((status) => {
+            console.log('Subscription status:', status);
+          });
+      } catch (error) {
+        console.error('Real-time subscription error:', error);
+      }
+    };
+
+    setupRealtimeSubscription();
 
     return () => {
-      supabase.removeChannel(channel);
+      if (channel) {
+        console.log('Unsubscribing from channel');
+        supabase.removeChannel(channel);
+      }
     };
-  }, [queryClient]);
+  }, []); // Empty dependency array to run only once
 
   return {
     tasks,
