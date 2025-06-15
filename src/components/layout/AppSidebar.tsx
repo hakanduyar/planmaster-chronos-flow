@@ -12,7 +12,8 @@ import {
   Home,
   FolderOpen,
   BarChart3,
-  Repeat
+  Repeat,
+  Sparkles
 } from 'lucide-react';
 import {
   Sidebar,
@@ -79,25 +80,30 @@ const AppSidebar: React.FC = () => {
   ];
 
   const quickActions = [
-    { label: 'Yeni Görev', icon: <Plus className="h-4 w-4" />, action: () => {}, color: 'text-blue-400' },
-    { label: 'Takvim', icon: <Calendar className="h-4 w-4" />, action: () => navigate('/calendar'), color: 'text-green-400' },
-    { label: 'Filtreler', icon: <Filter className="h-4 w-4" />, action: () => {}, color: 'text-purple-400' },
-    { label: 'Ayarlar', icon: <Settings className="h-4 w-4" />, action: () => {}, color: 'text-gray-400' },
+    { label: 'Yeni Görev', icon: <Plus className="h-4 w-4" />, action: () => {}, color: 'text-blue-300' },
+    { label: 'Takvim', icon: <Calendar className="h-4 w-4" />, action: () => navigate('/calendar'), color: 'text-green-300' },
+    { label: 'Filtreler', icon: <Filter className="h-4 w-4" />, action: () => {}, color: 'text-purple-300' },
+    { label: 'Ayarlar', icon: <Settings className="h-4 w-4" />, action: () => {}, color: 'text-gray-300' },
   ];
 
   return (
-    <Sidebar className="bg-gray-900/80 backdrop-blur-sm border-r border-white/10 h-full">
-      <SidebarHeader className="p-3 border-b border-white/10">
-        <div className="flex items-center space-x-2">
-          <CheckSquare className="h-5 w-5 text-blue-400" />
-          <span className="text-base font-bold text-white">PlanMaster</span>
+    <Sidebar className="bg-gray-900/90 backdrop-blur-md border-r border-white/15 h-full">
+      <SidebarHeader className="p-4 border-b border-white/10">
+        <div className="flex items-center space-x-3">
+          <div className="p-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg">
+            <CheckSquare className="h-5 w-5 text-blue-300" />
+          </div>
+          <span className="text-lg font-bold gradient-text">PlanMaster</span>
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="p-3 space-y-3 flex-1">
+      <SidebarContent className="p-4 space-y-4 flex-1">
         {/* Navigation Menu */}
         <SidebarGroup>
-          <SidebarGroupLabel className="text-white/70 text-xs">Navigasyon</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-white/70 text-sm font-medium flex items-center gap-2">
+            <Sparkles className="h-4 w-4" />
+            Navigasyon
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -105,11 +111,11 @@ const AppSidebar: React.FC = () => {
                   <SidebarMenuButton
                     asChild
                     isActive={location.pathname === item.url}
-                    className="text-white hover:bg-white/10 h-8"
+                    className="text-white hover:bg-white/10 h-10 text-base transition-colors"
                   >
                     <button onClick={() => navigate(item.url)}>
-                      <item.icon className="h-4 w-4" />
-                      <span className="text-sm">{item.title}</span>
+                      <item.icon className="h-5 w-5" />
+                      <span>{item.title}</span>
                     </button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -124,14 +130,14 @@ const AppSidebar: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <Card className="glass-card bg-white/5 border-white/10">
-            <CardHeader className="pb-1 px-3 pt-3">
-              <CardTitle className="text-white flex items-center text-xs">
-                <CheckSquare className="h-3 w-3 mr-2 text-blue-400" />
+          <Card className="glass-card border-white/15">
+            <CardHeader className="pb-2 px-4 pt-4">
+              <CardTitle className="text-white flex items-center text-sm font-medium">
+                <CheckSquare className="h-4 w-4 mr-2 text-blue-300" />
                 Hızlı Görev Ekle
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0 px-3 pb-3">
+            <CardContent className="pt-0 px-4 pb-4">
               <QuickTaskInput />
             </CardContent>
           </Card>
@@ -143,19 +149,19 @@ const AppSidebar: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="glass-card bg-white/5 border-white/10">
-            <CardHeader className="pb-1 px-3 pt-3">
-              <CardTitle className="text-white flex items-center text-xs">
-                <Clock className="h-3 w-3 mr-2 text-blue-400" />
+          <Card className="glass-card border-white/15">
+            <CardHeader className="pb-2 px-4 pt-4">
+              <CardTitle className="text-white flex items-center text-sm font-medium">
+                <Clock className="h-4 w-4 mr-2 text-blue-300" />
                 Hızlı İşlemler
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-1 pt-0 px-3 pb-3">
+            <CardContent className="space-y-2 pt-0 px-4 pb-4">
               {quickActions.map((action, index) => (
                 <Button
                   key={action.label}
                   variant="ghost"
-                  className="w-full justify-start text-white hover:bg-white/10 h-7 text-xs"
+                  className="w-full justify-start text-white hover:bg-white/10 h-9 text-sm transition-colors"
                   onClick={action.action}
                 >
                   <span className={action.color}>{action.icon}</span>
@@ -172,36 +178,47 @@ const AppSidebar: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <Card className="glass-card bg-white/5 border-white/10">
-            <CardHeader className="pb-1 px-3 pt-3">
-              <CardTitle className="text-white flex items-center text-xs">
-                <Calendar className="h-3 w-3 mr-2 text-blue-400" />
+          <Card className="glass-card border-white/15">
+            <CardHeader className="pb-2 px-4 pt-4">
+              <CardTitle className="text-white flex items-center text-sm font-medium">
+                <Calendar className="h-4 w-4 mr-2 text-blue-300" />
                 Bugün
               </CardTitle>
             </CardHeader>
-            <CardContent className="pt-0 px-3 pb-3">
-              <div className="space-y-1 text-xs text-white/70">
-                <div className="flex justify-between">
-                  <span>Toplam görev:</span>
+            <CardContent className="pt-0 px-4 pb-4">
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-white/70">Toplam görev:</span>
                   <span className="text-white font-semibold">{todayStats.total}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Tamamlanan:</span>
-                  <span className="text-green-400 font-semibold">{todayStats.completed}</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-white/70">Tamamlanan:</span>
+                  <span className="text-green-300 font-semibold">{todayStats.completed}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Kalan:</span>
-                  <span className="text-yellow-400 font-semibold">{todayStats.remaining}</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-white/70">Kalan:</span>
+                  <span className="text-yellow-300 font-semibold">{todayStats.remaining}</span>
                 </div>
+                {todayStats.total > 0 && (
+                  <div className="mt-3">
+                    <div className="w-full bg-white/10 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${todayStats.total > 0 ? (todayStats.completed / todayStats.total) * 100 : 0}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
         </motion.div>
       </SidebarContent>
 
-      <SidebarFooter className="p-3 border-t border-white/10">
-        <div className="text-xs text-white/50 text-center">
-          PlanMaster Pro v1.0
+      <SidebarFooter className="p-4 border-t border-white/10">
+        <div className="text-sm text-white/50 text-center">
+          <span className="gradient-text font-medium">PlanMaster Pro</span>
+          <span className="block text-xs mt-1">v1.0</span>
         </div>
       </SidebarFooter>
     </Sidebar>
