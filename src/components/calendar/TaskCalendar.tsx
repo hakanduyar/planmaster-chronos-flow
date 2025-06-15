@@ -17,7 +17,11 @@ import './calendar.css';
 moment.locale('tr');
 const localizer = momentLocalizer(moment);
 
-interface CalendarEvent extends Event {
+interface CalendarEvent {
+  id: string;
+  title: string;
+  start: Date;
+  end: Date;
   task: Task;
   resource?: any;
 }
