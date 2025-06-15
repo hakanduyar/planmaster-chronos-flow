@@ -6,7 +6,7 @@ interface PublicRouteProps {
   children: React.ReactNode
 }
 
-export function PublicRoute({ children }: PublicRouteProps) {
+export default function PublicRoute({ children }: PublicRouteProps) {
   const { user, loading } = useAuth()
 
   if (loading) {
@@ -18,7 +18,7 @@ export function PublicRoute({ children }: PublicRouteProps) {
   }
 
   if (user) {
-    return <Navigate to="/dashboard" replace />
+    return <Navigate to="/" replace />
   }
 
   return <>{children}</>
