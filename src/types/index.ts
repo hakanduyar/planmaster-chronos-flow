@@ -19,6 +19,12 @@ export interface Category {
   name: string;
   color: string;
   icon: string;
+  user_id?: string;
+  emoji?: string;
+  description?: string;
+  created_at?: string;
+  updated_at?: string;
+  task_count?: number;
 }
 
 export interface DashboardStats {

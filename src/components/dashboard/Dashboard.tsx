@@ -4,11 +4,13 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { Plus, Calendar, CheckCircle, Clock, AlertCircle, TrendingUp } from 'lucide-react';
+import { Plus, Calendar, CheckCircle, Clock, AlertCircle, TrendingUp, Settings } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { mockTasks, mockCategories, getMockStats } from '@/lib/mockData';
 import { DashboardStats } from '@/types';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const stats = getMockStats(mockTasks);
   const completionRate = Math.round((stats.completedTasks / stats.totalTasks) * 100);
 
@@ -31,10 +33,20 @@ const Dashboard = () => {
           <h1 className="text-4xl font-bold gradient-text mb-2">PlanMaster Pro</h1>
           <p className="text-white/70 text-lg">Günlük planlarınızı takip edin ve hedeflerinize ulaşın</p>
         </div>
-        <Button className="planmaster-button group">
-          <Plus className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300" />
-          Yeni Görev
-        </Button>
+        <div className="flex space-x-3">
+          <Button 
+            onClick={() => navigate('/categories')}
+            variant="outline"
+            className="border-white/20 text-white hover:bg-white/10"
+          >
+            <Settings className="w-5 h-5 mr-2" />
+            Kategoriler
+          </Button>
+          <Button className="planmaster-button group">
+            <Plus className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300" />
+            Yeni Görev
+          </Button>
+        </div>
       </motion.div>
 
       {/* Stats Grid */}
