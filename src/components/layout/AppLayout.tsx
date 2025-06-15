@@ -9,10 +9,10 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
-    <div className="flex min-h-screen w-full">
+    <div className="flex h-screen w-full overflow-hidden">
       <AppSidebar />
-      <SidebarInset className="flex-1">
-        <header className="flex h-16 shrink-0 items-center gap-2 px-4 border-b border-white/10">
+      <SidebarInset className="flex-1 flex flex-col">
+        <header className="flex h-14 shrink-0 items-center gap-2 px-6 border-b border-white/10 bg-gray-900/50 backdrop-blur-sm">
           <SidebarTrigger className="text-white" />
           <div className="flex items-center gap-2">
             <h1 className="text-xl font-bold text-white">PlanMaster Pro</h1>

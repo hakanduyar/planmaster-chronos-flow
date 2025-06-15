@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -85,15 +86,15 @@ const AppSidebar: React.FC = () => {
   ];
 
   return (
-    <Sidebar className="bg-gray-900/50 backdrop-blur-sm border-r border-white/10">
-      <SidebarHeader className="p-4">
+    <Sidebar className="bg-gray-900/80 backdrop-blur-sm border-r border-white/10 h-full">
+      <SidebarHeader className="p-4 border-b border-white/10">
         <div className="flex items-center space-x-2">
           <CheckSquare className="h-6 w-6 text-blue-400" />
           <span className="text-lg font-bold text-white">PlanMaster</span>
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="p-4 space-y-6">
+      <SidebarContent className="p-4 space-y-4 h-full overflow-y-auto">
         {/* Navigation Menu */}
         <SidebarGroup>
           <SidebarGroupLabel className="text-white/70">Navigasyon</SidebarGroupLabel>
@@ -124,13 +125,13 @@ const AppSidebar: React.FC = () => {
           transition={{ delay: 0.1 }}
         >
           <Card className="glass-card bg-white/5 border-white/10">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-2">
               <CardTitle className="text-white flex items-center text-sm">
                 <CheckSquare className="h-4 w-4 mr-2 text-blue-400" />
                 Hızlı Görev Ekle
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-0">
               <QuickTaskInput />
             </CardContent>
           </Card>
@@ -143,13 +144,13 @@ const AppSidebar: React.FC = () => {
           transition={{ delay: 0.2 }}
         >
           <Card className="glass-card bg-white/5 border-white/10">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-2">
               <CardTitle className="text-white flex items-center text-sm">
                 <Clock className="h-4 w-4 mr-2 text-blue-400" />
                 Hızlı İşlemler
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
+            <CardContent className="space-y-1 pt-0">
               {quickActions.map((action, index) => (
                 <Button
                   key={action.label}
@@ -172,13 +173,13 @@ const AppSidebar: React.FC = () => {
           transition={{ delay: 0.3 }}
         >
           <Card className="glass-card bg-white/5 border-white/10">
-            <CardHeader className="pb-3">
+            <CardHeader className="pb-2">
               <CardTitle className="text-white flex items-center text-sm">
                 <Calendar className="h-4 w-4 mr-2 text-blue-400" />
                 Bugün
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="pt-0">
               <div className="space-y-2 text-sm text-white/70">
                 <div className="flex justify-between">
                   <span>Toplam görev:</span>
@@ -198,7 +199,7 @@ const AppSidebar: React.FC = () => {
         </motion.div>
       </SidebarContent>
 
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-4 border-t border-white/10">
         <div className="text-xs text-white/50 text-center">
           PlanMaster Pro v1.0
         </div>

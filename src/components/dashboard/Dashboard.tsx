@@ -69,89 +69,92 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="h-full w-full">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center space-y-2"
+        className="text-center py-6 px-6"
       >
-        <h1 className="text-3xl font-bold text-white">Dashboard</h1>
+        <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
         <p className="text-white/70">Görev yönetimi ve ilerleme takibi</p>
       </motion.div>
 
-      {/* Stats Cards */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
-      >
-        {statCards.map((stat, index) => (
-          <motion.div
-            key={stat.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 + index * 0.1 }}
-          >
-            <Card className="glass-card bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-white/70 text-sm font-medium">{stat.title}</p>
-                    <p className="text-2xl font-bold text-white">{stat.value}</p>
+      <div className="px-6 space-y-6">
+        {/* Stats Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+          {statCards.map((stat, index) => (
+            <motion.div
+              key={stat.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + index * 0.1 }}
+            >
+              <Card className="glass-card bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-white/70 text-sm font-medium">{stat.title}</p>
+                      <p className="text-2xl font-bold text-white">{stat.value}</p>
+                    </div>
+                    <div className={`p-3 rounded-full ${stat.bgColor}`}>
+                      <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                    </div>
                   </div>
-                  <div className={`p-3 rounded-full ${stat.bgColor}`}>
-                    <stat.icon className={`h-6 w-6 ${stat.color}`} />
-                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Completion Rate */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <Card className="glass-card bg-white/5 border-white/10">
+            <CardHeader>
+              <CardTitle className="text-white flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-green-400" />
+                Tamamlanma Oranı
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-white/70">İlerleme</span>
+                  <span className="text-white font-semibold">{stats.completionRate}%</span>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Completion Rate */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <Card className="glass-card bg-white/5 border-white/10">
-          <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-green-400" />
-              Tamamlanma Oranı
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-white/70">İlerleme</span>
-                <span className="text-white font-semibold">{stats.completionRate}%</span>
+                <div className="w-full bg-white/10 rounded-full h-2">
+                  <div 
+                    className="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${stats.completionRate}%` }}
+                  />
+                </div>
+                <p className="text-xs text-white/50">
+                  {stats.completed} / {stats.total} görev tamamlandı
+                </p>
               </div>
-              <div className="w-full bg-white/10 rounded-full h-2">
-                <div 
-                  className="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-500"
-                  style={{ width: `${stats.completionRate}%` }}
-                />
-              </div>
-              <p className="text-xs text-white/50">
-                {stats.completed} / {stats.total} görev tamamlandı
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-      {/* Task Tabs */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
-      >
-        <TaskTabs />
-      </motion.div>
+        {/* Task Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="pb-6"
+        >
+          <TaskTabs />
+        </motion.div>
+      </div>
     </div>
   );
 };
