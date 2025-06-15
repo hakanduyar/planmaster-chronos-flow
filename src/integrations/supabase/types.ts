@@ -42,6 +42,152 @@ export type Database = {
         }
         Relationships: []
       }
+      recurrence_patterns: {
+        Row: {
+          category_id: string
+          created_at: string
+          day_of_month: number | null
+          days_of_week: number[] | null
+          description: string | null
+          end_date: string | null
+          estimated_time: number | null
+          id: string
+          interval_value: number
+          is_active: boolean
+          max_occurrences: number | null
+          notes: string | null
+          priority: string
+          recurrence_type: Database["public"]["Enums"]["recurrence_type"]
+          start_date: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          day_of_month?: number | null
+          days_of_week?: number[] | null
+          description?: string | null
+          end_date?: string | null
+          estimated_time?: number | null
+          id?: string
+          interval_value?: number
+          is_active?: boolean
+          max_occurrences?: number | null
+          notes?: string | null
+          priority?: string
+          recurrence_type: Database["public"]["Enums"]["recurrence_type"]
+          start_date: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          day_of_month?: number | null
+          days_of_week?: number[] | null
+          description?: string | null
+          end_date?: string | null
+          estimated_time?: number | null
+          id?: string
+          interval_value?: number
+          is_active?: boolean
+          max_occurrences?: number | null
+          notes?: string | null
+          priority?: string
+          recurrence_type?: Database["public"]["Enums"]["recurrence_type"]
+          start_date?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recurrence_patterns_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      task_instances: {
+        Row: {
+          actual_time: number | null
+          category_id: string
+          completed: boolean
+          created_at: string
+          description: string | null
+          due_date: string
+          estimated_time: number | null
+          id: string
+          is_pattern_instance: boolean
+          notes: string | null
+          pattern_id: string
+          priority: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_time?: number | null
+          category_id: string
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          due_date: string
+          estimated_time?: number | null
+          id?: string
+          is_pattern_instance?: boolean
+          notes?: string | null
+          pattern_id: string
+          priority?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_time?: number | null
+          category_id?: string
+          completed?: boolean
+          created_at?: string
+          description?: string | null
+          due_date?: string
+          estimated_time?: number | null
+          id?: string
+          is_pattern_instance?: boolean
+          notes?: string | null
+          pattern_id?: string
+          priority?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "task_instances_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "task_instances_pattern_id_fkey"
+            columns: ["pattern_id"]
+            isOneToOne: false
+            referencedRelation: "recurrence_patterns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tasks: {
         Row: {
           actual_time: number | null
@@ -106,10 +252,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_task_instances_for_pattern: {
+        Args: { pattern_id: string; days_ahead?: number }
+        Returns: number
+      }
     }
     Enums: {
-      [_ in never]: never
+      recurrence_type: "daily" | "weekly" | "monthly" | "yearly"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -224,6 +373,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      recurrence_type: ["daily", "weekly", "monthly", "yearly"],
+    },
   },
 } as const
