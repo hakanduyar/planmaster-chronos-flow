@@ -74,19 +74,19 @@ const Dashboard: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center py-6 px-6"
+        className="text-center py-4 px-4"
       >
-        <h1 className="text-3xl font-bold text-white mb-2">Dashboard</h1>
-        <p className="text-white/70">Görev yönetimi ve ilerleme takibi</p>
+        <h1 className="text-2xl font-bold text-white mb-1">Dashboard</h1>
+        <p className="text-white/70 text-sm">Görev yönetimi ve ilerleme takibi</p>
       </motion.div>
 
-      <div className="px-6 space-y-6">
+      <div className="px-4 space-y-4 pb-4">
         {/* Stats Cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3"
         >
           {statCards.map((stat, index) => (
             <motion.div
@@ -96,14 +96,14 @@ const Dashboard: React.FC = () => {
               transition={{ delay: 0.1 + index * 0.1 }}
             >
               <Card className="glass-card bg-white/5 border-white/10 hover:bg-white/10 transition-all duration-300">
-                <CardContent className="p-6">
+                <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-white/70 text-sm font-medium">{stat.title}</p>
-                      <p className="text-2xl font-bold text-white">{stat.value}</p>
+                      <p className="text-white/70 text-xs font-medium">{stat.title}</p>
+                      <p className="text-xl font-bold text-white">{stat.value}</p>
                     </div>
-                    <div className={`p-3 rounded-full ${stat.bgColor}`}>
-                      <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                    <div className={`p-2 rounded-full ${stat.bgColor}`}>
+                      <stat.icon className={`h-5 w-5 ${stat.color}`} />
                     </div>
                   </div>
                 </CardContent>
@@ -119,9 +119,9 @@ const Dashboard: React.FC = () => {
           transition={{ delay: 0.5 }}
         >
           <Card className="glass-card bg-white/5 border-white/10">
-            <CardHeader>
-              <CardTitle className="text-white flex items-center gap-2">
-                <TrendingUp className="h-5 w-5 text-green-400" />
+            <CardHeader className="pb-2">
+              <CardTitle className="text-white flex items-center gap-2 text-base">
+                <TrendingUp className="h-4 w-4 text-green-400" />
                 Tamamlanma Oranı
               </CardTitle>
             </CardHeader>
@@ -150,7 +150,6 @@ const Dashboard: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="pb-6"
         >
           <TaskTabs />
         </motion.div>
