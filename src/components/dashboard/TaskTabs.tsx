@@ -49,6 +49,7 @@ const TaskTabs: React.FC = () => {
             tasks={[...regularTasks, ...taskInstances]} 
             isLoading={isLoadingTasks || isLoadingInstances}
             showPatternInstances={true}
+            hideFilters={true}
           />
         </TabsContent>
 
@@ -61,6 +62,7 @@ const TaskTabs: React.FC = () => {
             tasks={todayTasks} 
             isLoading={isLoadingTasks || isLoadingInstances}
             showPatternInstances={true}
+            hideFilters={true}
           />
         </TabsContent>
       </Tabs>

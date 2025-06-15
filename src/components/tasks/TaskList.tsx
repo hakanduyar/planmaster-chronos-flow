@@ -9,10 +9,24 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { CheckCircle, Clock, Search, Filter, MoreVertical, Edit, Trash2 } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useTasks } from '@/hooks/useTasks';
+import { useTaskInstances } from '@/hooks/useTaskInstances';
 import { Task, TaskFilters } from '@/types/task';
+import { TaskInstance } from '@/types/pattern';
 import TaskModal from './TaskModal';
 
-const TaskList: React.FC = () => {
+interface TaskListProps {
+  tasks?: (Task | TaskInstance)[];
+  isLoading?: boolean;
+  showPatternInstances?: boolean;
+  hideFilters?: boolean;
+}
+
+const TaskList: React.FC<TaskListProps> = ({ 
+  tasks: propTasks, 
+  isLoading: propIsLoading, 
+  showPatternInstances = false,
+  hideFilters = false
+}) => {
   const [filters, setFilters] = useState<TaskFilters>({
     status: 'all',
     categories: [],
@@ -21,7 +35,15 @@ const TaskList: React.FC = () => {
   });
 
   const [editingTask, setEditingTask] = useState<Task | null>(null);
-  const { tasks, isLoading, toggleTask, deleteTask } = useTasks(filters);
+  
+  // Use hooks only if no props are provided
+  const { tasks: hookTasks, isLoading: hookIsLoading, toggleTask, deleteTask } = useTasks(
+    propTasks ? undefined : filters
+  );
+  
+  // Determine which data to use
+  const tasks = propTasks || hookTasks;
+  const isLoading = propIsLoading !== undefined ? propIsLoading : hookIsLoading;
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters(prev => ({ ...prev, search: e.target.value }));
@@ -31,14 +53,20 @@ const TaskList: React.FC = () => {
     setFilters(prev => ({ ...prev, status: status as TaskFilters['status'] }));
   };
 
-  const handleEditTask = (task: Task) => {
-    setEditingTask(task);
+  const handleEditTask = (task: Task | TaskInstance) => {
+    // Only allow editing of regular tasks, not pattern instances
+    if ('pattern_id' in task) return;
+    setEditingTask(task as Task);
   };
 
   const handleDeleteTask = (taskId: string) => {
     if (confirm('Bu görevi silmek istediğinizden emin misiniz?')) {
       deleteTask(taskId);
     }
+  };
+
+  const handleToggleTask = (task: Task | TaskInstance) => {
+    toggleTask(task);
   };
 
   const getPriorityColor = (priority: string) => {
@@ -60,35 +88,37 @@ const TaskList: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-        <h2 className="text-2xl font-bold text-white">Görevlerim</h2>
-        
-        {/* Filters */}
-        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 h-4 w-4" />
-            <Input
-              placeholder="Görev ara..."
-              value={filters.search}
-              onChange={handleSearchChange}
-              className="pl-10 bg-white/10 border-white/20 text-white placeholder-white/50"
-            />
-          </div>
+      {/* Header and Filters - only show if not hidden */}
+      {!hideFilters && (
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <h2 className="text-2xl font-bold text-white">Görevlerim</h2>
           
-          <Select onValueChange={handleStatusFilter} defaultValue="all">
-            <SelectTrigger className="bg-white/10 border-white/20 text-white">
-              <SelectValue placeholder="Durum filtrele" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">Tümü</SelectItem>
-              <SelectItem value="active">Aktif</SelectItem>
-              <SelectItem value="completed">Tamamlanan</SelectItem>
-              <SelectItem value="overdue">Geciken</SelectItem>
-            </SelectContent>
-          </Select>
+          {/* Filters */}
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50 h-4 w-4" />
+              <Input
+                placeholder="Görev ara..."
+                value={filters.search}
+                onChange={handleSearchChange}
+                className="pl-10 bg-white/10 border-white/20 text-white placeholder-white/50"
+              />
+            </div>
+            
+            <Select onValueChange={handleStatusFilter} defaultValue="all">
+              <SelectTrigger className="bg-white/10 border-white/20 text-white">
+                <SelectValue placeholder="Durum filtrele" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Tümü</SelectItem>
+                <SelectItem value="active">Aktif</SelectItem>
+                <SelectItem value="completed">Tamamlanan</SelectItem>
+                <SelectItem value="overdue">Geciken</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Task List */}
       <div className="space-y-3">
@@ -113,7 +143,7 @@ const TaskList: React.FC = () => {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => toggleTask(task)}
+                        onClick={() => handleToggleTask(task)}
                         className="p-1 h-8 w-8"
                       >
                         <CheckCircle 
@@ -126,13 +156,20 @@ const TaskList: React.FC = () => {
                       </Button>
                       
                       <div className="flex-1">
-                        <h3 className={`font-medium ${
-                          task.completed 
-                            ? 'text-white/60 line-through' 
-                            : 'text-white'
-                        }`}>
-                          {task.title}
-                        </h3>
+                        <div className="flex items-center gap-2">
+                          <h3 className={`font-medium ${
+                            task.completed 
+                              ? 'text-white/60 line-through' 
+                              : 'text-white'
+                          }`}>
+                            {task.title}
+                          </h3>
+                          {('pattern_id' in task) && (
+                            <Badge className="text-xs bg-purple-500/20 text-purple-400">
+                              Tekrarlayan
+                            </Badge>
+                          )}
+                        </div>
                         {task.description && (
                           <p className="text-sm text-white/60 mt-1">
                             {task.description}
@@ -174,13 +211,15 @@ const TaskList: React.FC = () => {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="bg-gray-900 border-white/20">
-                        <DropdownMenuItem 
-                          onClick={() => handleEditTask(task)}
-                          className="text-white hover:bg-white/10 cursor-pointer"
-                        >
-                          <Edit className="h-4 w-4 mr-2" />
-                          Düzenle
-                        </DropdownMenuItem>
+                        {!('pattern_id' in task) && (
+                          <DropdownMenuItem 
+                            onClick={() => handleEditTask(task)}
+                            className="text-white hover:bg-white/10 cursor-pointer"
+                          >
+                            <Edit className="h-4 w-4 mr-2" />
+                            Düzenle
+                          </DropdownMenuItem>
+                        )}
                         <DropdownMenuItem 
                           onClick={() => handleDeleteTask(task.id)}
                           className="text-red-400 hover:bg-red-500/10 cursor-pointer"
