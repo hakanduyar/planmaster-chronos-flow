@@ -79,9 +79,22 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
 
   const onSubmit = (data: CategoryFormData) => {
     if (isEditing && category) {
-      updateCategory({ id: category.id, data });
+      updateCategory({ 
+        id: category.id, 
+        data: {
+          name: data.name,
+          description: data.description,
+          emoji: data.emoji,
+          color: data.color,
+        }
+      });
     } else {
-      createCategory(data);
+      createCategory({
+        name: data.name,
+        emoji: data.emoji,
+        color: data.color,
+        description: data.description,
+      });
     }
     onClose();
   };
