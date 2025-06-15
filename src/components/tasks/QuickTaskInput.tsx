@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Loader2 } from 'lucide-react';
@@ -12,7 +13,7 @@ interface QuickTaskInputProps {
 }
 
 const QuickTaskInput: React.FC<QuickTaskInputProps> = ({ 
-  autoFocus = true, 
+  autoFocus = false, 
   onTaskCreated 
 }) => {
   const [title, setTitle] = useState('');
@@ -35,12 +36,15 @@ const QuickTaskInput: React.FC<QuickTaskInputProps> = ({
     if (!title.trim() || isCreating || !defaultCategory) return;
 
     try {
+      const today = new Date();
+      today.setHours(23, 59, 59, 999); // End of today
+
       createTask({
         title: title.trim(),
         priority: 'medium',
         category_id: defaultCategory.id,
         estimated_time: 30,
-        due_date: new Date().toISOString(),
+        due_date: today.toISOString(),
       });
 
       // Success animation
@@ -74,8 +78,16 @@ const QuickTaskInput: React.FC<QuickTaskInputProps> = ({
     // Auto-resize textarea
     const textarea = e.target;
     textarea.style.height = 'auto';
-    textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px'; // Max 3 lines
+    textarea.style.height = Math.min(textarea.scrollHeight, 80) + 'px'; // Max 3 lines
   };
+
+  if (!defaultCategory) {
+    return (
+      <div className="text-white/50 text-sm">
+        Kategori yükleniyor...
+      </div>
+    );
+  }
 
   return (
     <motion.form
@@ -92,17 +104,17 @@ const QuickTaskInput: React.FC<QuickTaskInputProps> = ({
           onKeyDown={handleKeyDown}
           placeholder="Görev ekle ve Enter'a bas..."
           className={`
-            min-h-[2.5rem] max-h-[120px] resize-none transition-all duration-300
+            min-h-[2.5rem] max-h-[80px] resize-none transition-all duration-300 text-sm
             bg-white/5 border-white/20 text-white placeholder:text-white/50
-            focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20
-            ${isSuccess ? 'border-green-400 ring-2 ring-green-400/20' : ''}
+            focus:border-blue-400 focus:ring-1 focus:ring-blue-400/20
+            ${isSuccess ? 'border-green-400 ring-1 ring-green-400/20' : ''}
           `}
           disabled={isCreating}
         />
         
         {isCreating && (
           <div className="absolute right-3 top-3">
-            <Loader2 className="h-4 w-4 animate-spin text-white/50" />
+            <Loader2 className="h-3 w-3 animate-spin text-white/50" />
           </div>
         )}
       </div>
@@ -123,12 +135,12 @@ const QuickTaskInput: React.FC<QuickTaskInputProps> = ({
         <Button
           type="submit"
           disabled={!title.trim() || isCreating}
-          className="w-full planmaster-button"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm h-8"
         >
           {isCreating ? (
-            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+            <Loader2 className="h-3 w-3 animate-spin mr-2" />
           ) : (
-            <Plus className="h-4 w-4 mr-2" />
+            <Plus className="h-3 w-3 mr-2" />
           )}
           Görev Ekle
         </Button>

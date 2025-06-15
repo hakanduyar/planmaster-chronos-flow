@@ -16,14 +16,14 @@ import TaskCard from './TaskCard';
 import TaskModal from './TaskModal';
 import { useTasks } from '@/hooks/useTasks';
 import { useCategories } from '@/hooks/useCategories';
-import { Task, TaskFilters, TaskSort, TaskStatus, TaskPriority } from '@/types/task';
+import { DatabaseTask, TaskFilters, TaskSort, TaskStatus } from '@/types/task';
 
 type ViewMode = 'grid' | 'list' | 'kanban';
 
 const TaskList: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [editingTask, setEditingTask] = useState<DatabaseTask | null>(null);
   const [filters, setFilters] = useState<TaskFilters>({
     status: 'all',
     categories: [],
@@ -38,12 +38,12 @@ const TaskList: React.FC = () => {
   const { tasks, isLoading, deleteTask } = useTasks(filters, sort);
   const { categories } = useCategories();
 
-  const handleEditTask = (task: Task) => {
+  const handleEditTask = (task: DatabaseTask) => {
     setEditingTask(task);
     setIsModalOpen(true);
   };
 
-  const handleDeleteTask = (task: Task) => {
+  const handleDeleteTask = (task: DatabaseTask) => {
     if (confirm('Bu görevi silmek istediğinizden emin misiniz?')) {
       deleteTask(task.id);
     }
@@ -76,7 +76,7 @@ const TaskList: React.FC = () => {
       }
       groups[categoryName].push(task);
       return groups;
-    }, {} as Record<string, Task[]>);
+    }, {} as Record<string, DatabaseTask[]>);
   }, [tasks, viewMode]);
 
   if (isLoading) {
@@ -129,7 +129,7 @@ const TaskList: React.FC = () => {
 
           <Button 
             onClick={() => setIsModalOpen(true)}
-            className="planmaster-button"
+            className="bg-blue-600 hover:bg-blue-700 text-white"
           >
             <Plus className="h-4 w-4 mr-2" />
             Yeni Görev
@@ -138,7 +138,7 @@ const TaskList: React.FC = () => {
       </div>
 
       {/* Filters and Search */}
-      <Card className="glass-card">
+      <Card className="bg-white/5 border-white/10">
         <CardContent className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Search */}
@@ -219,7 +219,7 @@ const TaskList: React.FC = () => {
             className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             {Object.entries(groupedTasks).map(([categoryName, categoryTasks]) => (
-              <Card key={categoryName} className="glass-card">
+              <Card key={categoryName} className="bg-white/5 border-white/10">
                 <CardHeader className="pb-3">
                   <CardTitle className="text-white text-lg flex items-center">
                     <span className="mr-2">
@@ -284,7 +284,7 @@ const TaskList: React.FC = () => {
           </div>
           <Button 
             onClick={() => setIsModalOpen(true)}
-            className="planmaster-button"
+            className="bg-blue-600 hover:bg-blue-700 text-white"
           >
             <Plus className="h-4 w-4 mr-2" />
             İlk Görevini Oluştur

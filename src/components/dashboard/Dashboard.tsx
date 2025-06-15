@@ -3,7 +3,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, Clock, Calendar, TrendingUp } from 'lucide-react';
-import { Task as DatabaseTask } from '@/types/task';
 import { useTasks } from '@/hooks/useTasks';
 import TaskList from '../tasks/TaskList';
 
@@ -87,7 +86,7 @@ const Dashboard: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <Card className={`glass-card bg-gradient-to-br ${stat.color}`}>
+            <Card className={`bg-white/5 border-white/10 bg-gradient-to-br ${stat.color}`}>
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-white/80">
                   {stat.title}
