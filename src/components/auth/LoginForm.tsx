@@ -72,13 +72,13 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="w-full md:w-1/2 lg:w-1/2 flex items-center justify-center p-8 lg:p-12 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800">
+    <div className="w-full md:w-1/2 lg:w-1/2 flex items-center justify-center p-4 md:p-8 bg-gradient-to-br from-gray-50 to-gray-100">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-lg"
+        className="w-full max-w-md"
       >
-        <Card className="bg-transparent border-0 shadow-none">
+        <Card className="shadow-2xl border-0">
           <LoginFormHeader />
           <CardContent className="space-y-4">
             <Form {...form}>
