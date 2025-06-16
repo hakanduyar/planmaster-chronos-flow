@@ -24,7 +24,7 @@ export default function LoginFormActions({ form }: LoginFormActionsProps) {
                 onCheckedChange={field.onChange}
               />
             </FormControl>
-            <FormLabel className="text-sm font-normal">
+            <FormLabel className="text-sm font-normal text-white">
               Beni hatırla
             </FormLabel>
           </FormItem>

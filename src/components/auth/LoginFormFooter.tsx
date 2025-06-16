@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 export default function LoginFormFooter() {
   return (
     <div className="text-center pt-4 border-t">
-      <p className="text-sm text-gray-800">
+      <p className="text-sm text-white">
         Hesabınız yok mu?{' '}
         <Link
           to="/register"
