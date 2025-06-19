@@ -43,37 +43,37 @@ const Dashboard: React.FC = () => {
       value: stats.total,
       icon: Target,
       color: 'text-blue-300',
-      bgColor: 'bg-blue-500/15',
-      gradient: 'from-blue-500/20 to-blue-600/10'
+      bgColor: 'bg-blue-500/20',
+      gradient: 'from-blue-500/15 to-blue-600/5'
     },
     {
       title: 'Tamamlanan',
       value: stats.completed,
       icon: CheckSquare,
-      color: 'text-green-300',
-      bgColor: 'bg-green-500/15',
-      gradient: 'from-green-500/20 to-green-600/10'
+      color: 'text-emerald-300',
+      bgColor: 'bg-emerald-500/20',
+      gradient: 'from-emerald-500/15 to-emerald-600/5'
     },
     {
       title: 'Bekleyen',
       value: stats.pending,
       icon: Clock,
-      color: 'text-yellow-300',
-      bgColor: 'bg-yellow-500/15',
-      gradient: 'from-yellow-500/20 to-yellow-600/10'
+      color: 'text-amber-300',
+      bgColor: 'bg-amber-500/20',
+      gradient: 'from-amber-500/15 to-amber-600/5'
     },
     {
       title: 'Bugün',
       value: stats.today,
       icon: Calendar,
       color: 'text-purple-300',
-      bgColor: 'bg-purple-500/15',
-      gradient: 'from-purple-500/20 to-purple-600/10'
+      bgColor: 'bg-purple-500/20',
+      gradient: 'from-purple-500/15 to-purple-600/5'
     }
   ];
 
   return (
-    <div className="h-full w-full p-6 space-y-6">
+    <div className="h-full w-full p-6 space-y-6 relative">
       {/* Enhanced Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
             transition={{ delay: 0.1 + index * 0.1 }}
             whileHover={{ scale: 1.02 }}
           >
-            <Card className={`stat-card bg-gradient-to-br ${stat.gradient} border-white/15`}>
+            <Card className={`stat-card bg-gradient-to-br ${stat.gradient} border-white/10 hover:border-purple-400/30`}>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-2">
@@ -127,11 +127,11 @@ const Dashboard: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <Card className="glass-card border-white/15">
+        <Card className="bg-glass-strong border-white/10 hover:border-purple-400/30 transition-all duration-300">
           <CardHeader className="pb-3">
             <CardTitle className="text-white flex items-center gap-3 heading-small">
-              <div className="p-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg">
-                <TrendingUp className="h-5 w-5 text-green-300" />
+              <div className="p-2 bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-lg backdrop-blur-sm">
+                <TrendingUp className="h-5 w-5 text-emerald-300" />
               </div>
               Tamamlanma Oranı
             </CardTitle>
@@ -142,9 +142,9 @@ const Dashboard: React.FC = () => {
                 <span className="text-body">İlerleme Durumu</span>
                 <span className="text-white font-bold text-lg">{stats.completionRate}%</span>
               </div>
-              <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+              <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden backdrop-blur-sm">
                 <motion.div 
-                  className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 h-3 rounded-full"
+                  className="bg-gradient-to-r from-emerald-400 via-blue-500 to-purple-500 h-3 rounded-full shadow-lg"
                   initial={{ width: 0 }}
                   animate={{ width: `${stats.completionRate}%` }}
                   transition={{ duration: 1, ease: "easeOut" }}
@@ -152,7 +152,7 @@ const Dashboard: React.FC = () => {
               </div>
               <div className="flex justify-between items-center">
                 <p className="text-caption">
-                  <span className="font-semibold text-green-300">{stats.completed}</span> / {stats.total} görev tamamlandı
+                  <span className="font-semibold text-emerald-300">{stats.completed}</span> / {stats.total} görev tamamlandı
                 </p>
                 {stats.overdue > 0 && (
                   <p className="text-red-300 text-caption font-medium">
