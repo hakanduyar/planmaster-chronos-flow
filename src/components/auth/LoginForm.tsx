@@ -78,7 +78,7 @@ export default function LoginForm() {
     }} animate={{
       opacity: 1,
       y: 0
-    }} className="w-full h-full flex items-center justify-center p-8 my-[3px] mx-0 py-0 bg-slate-950 px-[38px]">
+    }} className="w-full h-full flex items-center justify-center p-8 mx-0 py-0 bg-slate-950 px-[39px] my-0">
         <Card className="shadow-2xl border-0 w-full max-w-md">
           <LoginFormHeader />
           <CardContent className="space-y-4">
