@@ -55,13 +55,19 @@
 
   html {
     font-size: 16px;
+    height: 100%;
   }
 
   body {
     @apply bg-gradient-modern text-foreground;
-    min-height: 100vh;
+    height: 100%;
     overflow: hidden;
     font-size: 1rem;
+  }
+
+  #root {
+    height: 100%;
+    overflow: hidden;
   }
 
   /* Enhanced scrollbar styles with better visibility */
@@ -157,32 +163,25 @@
     @apply bg-glass-strong hover:bg-white/15 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20;
   }
 
-  /* Enhanced dashboard layout */
-  .dashboard-container {
-    @apply h-full overflow-y-auto bg-gradient-modern;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(139, 92, 246, 0.3) rgba(255, 255, 255, 0.05);
-  }
-
   /* Typography improvements */
   .heading-large {
-    @apply text-3xl font-bold text-white;
+    @apply text-2xl sm:text-3xl font-bold text-white;
   }
 
   .heading-medium {
-    @apply text-xl font-semibold text-white;
+    @apply text-lg sm:text-xl font-semibold text-white;
   }
 
   .heading-small {
-    @apply text-lg font-medium text-white;
+    @apply text-base sm:text-lg font-medium text-white;
   }
 
   .text-body {
-    @apply text-base text-white/90;
+    @apply text-sm sm:text-base text-white/90;
   }
 
   .text-caption {
-    @apply text-sm text-white/80;
+    @apply text-xs sm:text-sm text-white/80;
   }
 
   .text-small {

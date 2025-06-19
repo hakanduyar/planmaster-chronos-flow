@@ -9,7 +9,7 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   return (
-    <div className="flex h-screen w-full bg-gradient-modern relative overflow-hidden">
+    <div className="flex h-screen w-full bg-gradient-modern relative">
       {/* Floating background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
@@ -18,7 +18,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       </div>
 
       <AppSidebar />
-      <SidebarInset className="flex-1 flex flex-col relative z-10">
+      <SidebarInset className="flex-1 flex flex-col relative z-10 min-h-0">
         <header className="flex h-14 shrink-0 items-center gap-3 px-6 border-b border-white/10 bg-white/5 backdrop-blur-sm">
           <SidebarTrigger className="text-white hover:bg-white/10 transition-colors" />
           <div className="flex items-center gap-3">
@@ -26,8 +26,10 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             <h1 className="text-xl font-bold gradient-text">PlanMaster Pro</h1>
           </div>
         </header>
-        <main className="flex-1 dashboard-container">
-          {children}
+        <main className="flex-1 overflow-y-auto min-h-0">
+          <div className="h-full min-h-full">
+            {children}
+          </div>
         </main>
       </SidebarInset>
     </div>
