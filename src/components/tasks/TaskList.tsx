@@ -57,14 +57,14 @@ const TaskList: React.FC<TaskListProps> = ({
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center p-8">
-        <div className="text-white">Görevler yükleniyor...</div>
+      <div className="flex items-center justify-center p-6 sm:p-8">
+        <div className="text-white text-sm sm:text-base">Görevler yükleniyor...</div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <TaskListHeader 
         hideFilters={hideFilters}
         filters={filters}
@@ -72,7 +72,7 @@ const TaskList: React.FC<TaskListProps> = ({
       />
 
       {/* Task List */}
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         {tasks.length === 0 ? (
           <TaskListEmpty />
         ) : (

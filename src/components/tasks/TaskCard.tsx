@@ -44,13 +44,13 @@ const TaskCard: React.FC<TaskCardProps> = ({
           task-card group cursor-pointer transition-all duration-300
           ${task.completed ? 'opacity-60' : ''}
           ${isOverdue ? 'border-red-500/50' : 'border-white/10'}
-          hover:scale-[1.02] hover:shadow-lg hover:shadow-black/20
+          hover:scale-[1.01] sm:hover:scale-[1.02] hover:shadow-lg hover:shadow-black/20
         `}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => onEdit(task)}
       >
-        <CardContent className="p-4 space-y-3">
+        <CardContent className="p-3 sm:p-4 space-y-2 sm:space-y-3">
           <TaskCardHeader
             task={task}
             isHovered={isHovered}

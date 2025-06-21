@@ -54,15 +54,21 @@
   }
 
   html {
-    font-size: 16px;
+    font-size: 14px;
     height: 100%;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      font-size: 16px;
+    }
   }
 
   body {
     @apply bg-gradient-modern text-foreground;
     height: 100%;
-    overflow: hidden;
     font-size: 1rem;
+    overflow: hidden;
   }
 
   #root {
@@ -72,19 +78,38 @@
 
   /* Enhanced scrollbar styles with better visibility */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
+  }
+
+  @media (min-width: 640px) {
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
   }
 
   ::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 4px;
+    border-radius: 3px;
+  }
+
+  @media (min-width: 640px) {
+    ::-webkit-scrollbar-track {
+      border-radius: 4px;
+    }
   }
 
   ::-webkit-scrollbar-thumb {
     background: rgba(139, 92, 246, 0.3);
-    border-radius: 4px;
+    border-radius: 3px;
     border: 1px solid rgba(139, 92, 246, 0.1);
+  }
+
+  @media (min-width: 640px) {
+    ::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+    }
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -104,6 +129,56 @@
   [data-sidebar="sidebar"]::-webkit-scrollbar {
     display: none;
   }
+
+  /* Responsive text sizing */
+  .text-responsive-xs {
+    @apply text-xs;
+  }
+
+  @media (min-width: 640px) {
+    .text-responsive-xs {
+      @apply text-sm;
+    }
+  }
+
+  .text-responsive-sm {
+    @apply text-sm;
+  }
+
+  @media (min-width: 640px) {
+    .text-responsive-sm {
+      @apply text-base;
+    }
+  }
+
+  .text-responsive-base {
+    @apply text-base;
+  }
+
+  @media (min-width: 640px) {
+    .text-responsive-base {
+      @apply text-lg;
+    }
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    .mobile-padding {
+      @apply px-3 py-2;
+    }
+    
+    .mobile-text {
+      @apply text-sm;
+    }
+    
+    .mobile-button {
+      @apply h-8 text-xs;
+    }
+    
+    .mobile-card {
+      @apply p-3;
+    }
+  }
 }
 
 @layer components {
@@ -117,11 +192,11 @@
   }
 
   .task-card {
-    @apply bg-glass backdrop-blur-sm border border-white/15 rounded-xl p-5 hover:border-purple-400/30 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300;
+    @apply bg-glass backdrop-blur-sm border border-white/15 rounded-xl p-3 sm:p-5 hover:border-purple-400/30 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300;
   }
 
   .planmaster-button {
-    @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl;
+    @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base;
   }
 
   /* Modern gradient backgrounds with sophisticated colors */
@@ -163,9 +238,9 @@
     @apply bg-glass-strong hover:bg-white/15 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20;
   }
 
-  /* Typography improvements */
+  /* Responsive typography improvements */
   .heading-large {
-    @apply text-2xl sm:text-3xl font-bold text-white;
+    @apply text-xl sm:text-2xl md:text-3xl font-bold text-white;
   }
 
   .heading-medium {
@@ -186,6 +261,23 @@
 
   .text-small {
     @apply text-xs text-white/70;
+  }
+
+  /* Mobile-first responsive classes */
+  .mobile-responsive {
+    @apply text-xs sm:text-sm md:text-base;
+  }
+
+  .mobile-card-responsive {
+    @apply p-2 sm:p-3 md:p-4;
+  }
+
+  .mobile-gap-responsive {
+    @apply gap-2 sm:gap-3 md:gap-4;
+  }
+
+  .mobile-padding-responsive {
+    @apply px-2 py-1 sm:px-3 sm:py-2 md:px-4 md:py-3;
   }
 
   /* Floating animation */
@@ -211,5 +303,21 @@
   }
   66% {
     transform: translateY(10px) rotate(240deg);
+  }
+}
+
+/* Mobile touch improvements */
+@media (max-width: 640px) {
+  button, 
+  [role="button"],
+  input,
+  textarea,
+  select {
+    min-height: 44px; /* Apple's recommended minimum touch target */
+  }
+  
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
   }
 }

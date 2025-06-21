@@ -19,8 +19,8 @@ const TaskListHeader: React.FC<TaskListHeaderProps> = ({
   }
 
   return (
-    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-      <h2 className="text-2xl font-bold text-white">Görevlerim</h2>
+    <div className="flex flex-col gap-3 sm:gap-4">
+      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">Görevlerim</h2>
       <TaskListFilters filters={filters} onFiltersChange={onFiltersChange} />
     </div>
   );

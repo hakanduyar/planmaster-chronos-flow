@@ -20,27 +20,30 @@ const TaskTabs: React.FC = () => {
   return (
     <div className="w-full">
       <Tabs defaultValue="all-tasks" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 mb-6 bg-white/10 backdrop-blur-sm">
+        <TabsList className="grid w-full grid-cols-3 mb-4 sm:mb-6 bg-white/10 backdrop-blur-sm h-auto p-1">
           <TabsTrigger 
             value="all-tasks" 
-            className="flex items-center gap-2 text-white data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-white data-[state=active]:bg-white/20 data-[state=active]:text-white py-2 px-1 sm:px-3 text-xs sm:text-sm"
           >
-            <CheckSquare className="h-4 w-4" />
-            Tüm Görevler
+            <CheckSquare className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Tüm Görevler</span>
+            <span className="sm:hidden">Tümü</span>
           </TabsTrigger>
           <TabsTrigger 
             value="patterns" 
-            className="flex items-center gap-2 text-white data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-white data-[state=active]:bg-white/20 data-[state=active]:text-white py-2 px-1 sm:px-3 text-xs sm:text-sm"
           >
-            <Repeat className="h-4 w-4" />
-            Tekrarlayan Görevler
+            <Repeat className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Tekrarlayan Görevler</span>
+            <span className="sm:hidden">Tekrar</span>
           </TabsTrigger>
           <TabsTrigger 
             value="today" 
-            className="flex items-center gap-2 text-white data-[state=active]:bg-white/20 data-[state=active]:text-white"
+            className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-white data-[state=active]:bg-white/20 data-[state=active]:text-white py-2 px-1 sm:px-3 text-xs sm:text-sm"
           >
-            <Calendar className="h-4 w-4" />
-            Bugün ({todayTasks.length})
+            <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Bugün ({todayTasks.length})</span>
+            <span className="sm:hidden">Bugün ({todayTasks.length})</span>
           </TabsTrigger>
         </TabsList>
 

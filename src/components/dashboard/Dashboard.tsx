@@ -73,19 +73,19 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="h-full w-full p-3 md:p-6 pb-16 md:pb-20 space-y-4 md:space-y-6 overflow-y-auto">
+    <div className="h-full w-full p-2 sm:p-3 md:p-4 lg:p-6 pb-16 sm:pb-16 md:pb-20 space-y-3 sm:space-y-4 md:space-y-6 overflow-y-auto">
       {/* Enhanced Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center py-4 md:py-6"
+        className="text-center py-2 sm:py-4 md:py-6"
       >
-        <h1 className="text-2xl md:text-4xl font-bold mb-2 md:mb-3 gradient-text">Dashboard</h1>
-        <p className="text-sm md:text-base text-white/90">Görev yönetimi ve ilerleme takibi</p>
-        <div className="flex items-center justify-center mt-3 md:mt-4 space-x-2">
-          <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400" />
-          <span className="text-xs md:text-sm text-white/80">Günlük hedeflerinizi takip edin</span>
-          <Star className="h-4 w-4 md:h-5 md:w-5 text-yellow-400" />
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2 md:mb-3 gradient-text">Dashboard</h1>
+        <p className="text-xs sm:text-sm md:text-base text-white/90">Görev yönetimi ve ilerleme takibi</p>
+        <div className="flex items-center justify-center mt-2 sm:mt-3 md:mt-4 space-x-2">
+          <Star className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-yellow-400" />
+          <span className="text-xs sm:text-sm text-white/80">Günlük hedeflerinizi takip edin</span>
+          <Star className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-yellow-400" />
         </div>
       </motion.div>
 
@@ -94,7 +94,7 @@ const Dashboard: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4"
+        className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4"
       >
         {statCards.map((stat, index) => (
           <motion.div
@@ -105,14 +105,14 @@ const Dashboard: React.FC = () => {
             whileHover={{ scale: 1.02 }}
           >
             <Card className={`stat-card bg-gradient-to-br ${stat.gradient} border-white/15`}>
-              <CardContent className="p-3 md:p-6">
+              <CardContent className="p-2 sm:p-3 md:p-4 lg:p-6">
                 <div className="flex items-center justify-between">
-                  <div className="space-y-1 md:space-y-2">
-                    <p className="text-xs md:text-sm text-white/80 font-medium">{stat.title}</p>
-                    <p className="text-lg md:text-3xl font-bold text-white">{stat.value}</p>
+                  <div className="space-y-1 md:space-y-2 min-w-0 flex-1">
+                    <p className="text-xs sm:text-sm text-white/80 font-medium truncate">{stat.title}</p>
+                    <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white">{stat.value}</p>
                   </div>
-                  <div className={`p-2 md:p-3 rounded-xl ${stat.bgColor} backdrop-blur-sm`}>
-                    <stat.icon className={`h-4 w-4 md:h-6 md:w-6 ${stat.color}`} />
+                  <div className={`p-1.5 sm:p-2 md:p-3 rounded-xl ${stat.bgColor} backdrop-blur-sm flex-shrink-0`}>
+                    <stat.icon className={`h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 lg:h-6 lg:w-6 ${stat.color}`} />
                   </div>
                 </div>
               </CardContent>
@@ -128,19 +128,19 @@ const Dashboard: React.FC = () => {
         transition={{ delay: 0.5 }}
       >
         <Card className="glass-card border-white/15">
-          <CardHeader className="pb-2 md:pb-3 px-4 md:px-6">
+          <CardHeader className="pb-2 md:pb-3 px-3 sm:px-4 md:px-6">
             <CardTitle className="text-white flex items-center gap-2 md:gap-3 text-sm md:text-lg">
-              <div className="p-1.5 md:p-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg">
-                <TrendingUp className="h-4 w-4 md:h-5 md:w-5 text-green-300" />
+              <div className="p-1 sm:p-1.5 md:p-2 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg">
+                <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5 text-green-300" />
               </div>
               Tamamlanma Oranı
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3 md:space-y-4 px-4 md:px-6 pb-4 md:pb-6">
+          <CardContent className="space-y-2 sm:space-y-3 md:space-y-4 px-3 sm:px-4 md:px-6 pb-3 sm:pb-4 md:pb-6">
             <div className="space-y-2 md:space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-xs md:text-sm text-white/80">İlerleme Durumu</span>
-                <span className="text-white font-bold text-base md:text-lg">{stats.completionRate}%</span>
+                <span className="text-xs sm:text-sm text-white/80">İlerleme Durumu</span>
+                <span className="text-white font-bold text-sm sm:text-base md:text-lg">{stats.completionRate}%</span>
               </div>
               <div className="w-full bg-white/10 rounded-full h-2 md:h-3 overflow-hidden">
                 <motion.div 
@@ -150,12 +150,12 @@ const Dashboard: React.FC = () => {
                   transition={{ duration: 1, ease: "easeOut" }}
                 />
               </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0">
-                <p className="text-xs md:text-sm text-white/80">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0">
+                <p className="text-xs sm:text-sm text-white/80">
                   <span className="font-semibold text-green-300">{stats.completed}</span> / {stats.total} görev tamamlandı
                 </p>
                 {stats.overdue > 0 && (
-                  <p className="text-red-300 text-xs md:text-sm font-medium">
+                  <p className="text-red-300 text-xs sm:text-sm font-medium">
                     {stats.overdue} gecikmiş görev
                   </p>
                 )}
