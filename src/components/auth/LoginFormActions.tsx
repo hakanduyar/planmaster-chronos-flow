@@ -12,7 +12,7 @@ interface LoginFormActionsProps {
 
 export default function LoginFormActions({ form }: LoginFormActionsProps) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0">
       <FormField
         control={form.control}
         name="rememberMe"
@@ -24,7 +24,7 @@ export default function LoginFormActions({ form }: LoginFormActionsProps) {
                 onCheckedChange={field.onChange}
               />
             </FormControl>
-            <FormLabel className="text-sm font-normal text-white">
+            <FormLabel className="text-xs md:text-sm font-normal text-white">
               Beni hatırla
             </FormLabel>
           </FormItem>
@@ -33,7 +33,7 @@ export default function LoginFormActions({ form }: LoginFormActionsProps) {
 
       <Link
         to="/forgot-password"
-        className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+        className="text-xs md:text-sm text-blue-400 hover:text-blue-300 hover:underline text-center sm:text-right"
       >
         Şifremi unuttum
       </Link>

@@ -20,13 +20,13 @@ export default function LoginFormFields({ form }: LoginFormFieldsProps) {
         name="email"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-white">Email</FormLabel>
+            <FormLabel className="text-white text-sm">Email</FormLabel>
             <FormControl>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <Input
                   placeholder="email@example.com"
-                  className="pl-10"
+                  className="pl-10 text-sm md:text-base"
                   {...field}
                 />
               </div>
@@ -41,14 +41,14 @@ export default function LoginFormFields({ form }: LoginFormFieldsProps) {
         name="password"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-white">Şifre</FormLabel>
+            <FormLabel className="text-white text-sm">Şifre</FormLabel>
             <FormControl>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <Input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Şifrenizi girin"
-                  className="pl-10 pr-10"
+                  className="pl-10 pr-10 text-sm md:text-base"
                   {...field}
                 />
                 <button
