@@ -44,8 +44,8 @@ const features = [
 
 export default function LandingFeatures() {
   return (
-    <section id="features" className="py-20 md:py-32 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="features" className="py-20 md:py-32 relative w-full">
+      <div className="w-full max-w-none px-6 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,33 +61,35 @@ export default function LandingFeatures() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ 
-                scale: 1.05,
-                transition: { duration: 0.2 }
-              }}
-              className="group"
-            >
-              <div className="glass-card p-6 md:p-8 h-full hover:border-purple-400/30 transition-all duration-300">
-                <div className={`w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <feature.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ 
+                  scale: 1.03,
+                  transition: { duration: 0.2 }
+                }}
+                className="group"
+              >
+                <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 h-full hover:border-purple-400/30 hover:bg-white/8 transition-all duration-300">
+                  <div className={`w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <feature.icon className="w-6 h-6 md:w-8 md:h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
+                    {feature.title}
+                  </h3>
+                  <p className="text-white/80 leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
-                  {feature.title}
-                </h3>
-                <p className="text-white/80 leading-relaxed">
-                  {feature.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

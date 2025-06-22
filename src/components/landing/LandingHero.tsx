@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button';
 
 export default function LandingHero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
+    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-14">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute top-1/4 left-1/4 w-64 h-64 md:w-96 md:h-96 bg-purple-600/20 rounded-full mix-blend-multiply filter blur-xl"
+          className="absolute top-1/4 left-1/4 w-72 h-72 md:w-96 md:h-96 bg-purple-600/15 rounded-full mix-blend-multiply filter blur-xl"
           animate={{
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360],
@@ -23,7 +23,7 @@ export default function LandingHero() {
           }}
         />
         <motion.div 
-          className="absolute top-3/4 right-1/4 w-64 h-64 md:w-96 md:h-96 bg-blue-600/20 rounded-full mix-blend-multiply filter blur-xl"
+          className="absolute top-3/4 right-1/4 w-72 h-72 md:w-96 md:h-96 bg-blue-600/15 rounded-full mix-blend-multiply filter blur-xl"
           animate={{
             scale: [1.2, 1, 1.2],
             rotate: [360, 180, 0],
@@ -35,7 +35,7 @@ export default function LandingHero() {
           }}
         />
         <motion.div 
-          className="absolute bottom-1/4 left-1/2 w-64 h-64 md:w-96 md:h-96 bg-pink-600/20 rounded-full mix-blend-multiply filter blur-xl"
+          className="absolute bottom-1/4 left-1/2 w-72 h-72 md:w-96 md:h-96 bg-pink-600/15 rounded-full mix-blend-multiply filter blur-xl"
           animate={{
             scale: [1, 1.3, 1],
             rotate: [0, -180, -360],
@@ -52,9 +52,9 @@ export default function LandingHero() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Rocket emoji */}
         <motion.div
-          className="absolute top-32 left-16 md:top-40 md:left-32 text-4xl md:text-6xl"
+          className="absolute top-28 left-8 md:top-36 md:left-20 text-3xl md:text-5xl"
           animate={{
-            y: [0, -20, 0],
+            y: [0, -15, 0],
             rotate: [0, 5, -5, 0],
           }}
           transition={{
@@ -68,9 +68,9 @@ export default function LandingHero() {
 
         {/* Chart emoji */}
         <motion.div
-          className="absolute top-48 right-12 md:top-56 md:right-24 text-3xl md:text-5xl"
+          className="absolute top-40 right-8 md:top-48 md:right-20 text-2xl md:text-4xl"
           animate={{
-            y: [0, 15, 0],
+            y: [0, 12, 0],
             rotate: [0, -3, 3, 0],
           }}
           transition={{
@@ -85,9 +85,9 @@ export default function LandingHero() {
 
         {/* Document emoji */}
         <motion.div
-          className="absolute bottom-32 left-8 md:bottom-40 md:left-20 text-3xl md:text-5xl"
+          className="absolute bottom-40 left-6 md:bottom-48 md:left-16 text-2xl md:text-4xl"
           animate={{
-            y: [0, -10, 0],
+            y: [0, -8, 0],
             rotate: [0, 2, -2, 0],
           }}
           transition={{
@@ -102,9 +102,9 @@ export default function LandingHero() {
 
         {/* Target emoji */}
         <motion.div
-          className="absolute bottom-48 right-16 md:bottom-56 md:right-32 text-4xl md:text-6xl"
+          className="absolute bottom-52 right-10 md:bottom-60 md:right-24 text-3xl md:text-5xl"
           animate={{
-            y: [0, 12, 0],
+            y: [0, 10, 0],
             rotate: [0, -4, 4, 0],
           }}
           transition={{
@@ -119,9 +119,9 @@ export default function LandingHero() {
 
         {/* Calendar emoji */}
         <motion.div
-          className="absolute top-20 right-8 md:top-32 md:right-16 text-3xl md:text-5xl"
+          className="absolute top-24 right-6 md:top-32 md:right-12 text-2xl md:text-4xl"
           animate={{
-            y: [0, -8, 0],
+            y: [0, -6, 0],
             rotate: [0, 3, -3, 0],
           }}
           transition={{
@@ -136,9 +136,9 @@ export default function LandingHero() {
 
         {/* Lightning emoji */}
         <motion.div
-          className="absolute bottom-20 left-20 md:bottom-32 md:left-40 text-3xl md:text-5xl"
+          className="absolute bottom-32 left-12 md:bottom-40 md:left-28 text-2xl md:text-4xl"
           animate={{
-            y: [0, 18, 0],
+            y: [0, 14, 0],
             rotate: [0, -5, 5, 0],
           }}
           transition={{
@@ -152,7 +152,7 @@ export default function LandingHero() {
         </motion.div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -166,7 +166,7 @@ export default function LandingHero() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="flex items-center justify-center gap-2 mb-6 md:mb-8"
           >
-            <div className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+            <div className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-white/5 backdrop-blur-sm rounded-full border border-white/10">
               <Zap className="w-4 h-4 md:w-5 md:h-5 text-purple-400" />
               <span className="text-white/90 text-sm md:text-base font-medium">
                 Karmaşayı Netliğe Dönüştürün
@@ -179,7 +179,7 @@ export default function LandingHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-5xl md:text-8xl font-bold text-white leading-tight"
+            className="text-4xl md:text-7xl lg:text-8xl font-bold text-white leading-tight"
           >
             <span className="gradient-text">PlanMaster</span>
             <br />
@@ -191,7 +191,7 @@ export default function LandingHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="text-xl md:text-3xl text-white/80 max-w-4xl mx-auto leading-relaxed"
+            className="text-lg md:text-2xl lg:text-3xl text-white/80 max-w-4xl mx-auto leading-relaxed"
           >
             Net ürün planları oluşturmanın zahmetsiz ve verimli olduğu bir dünya hayal edin. 
             <span className="gradient-text font-semibold"> PlanMaster Pro</span> ile fikirlerinizi 
@@ -231,17 +231,29 @@ export default function LandingHero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6"
           >
             <Link to="/register">
-              <Button className="planmaster-button group px-8 py-4 md:px-12 md:py-6 text-lg md:text-xl font-semibold">
-                Ücretsiz Denemeyi Başlat
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-8 py-4 md:px-12 md:py-6 text-lg md:text-xl font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 group">
+                  Ücretsiz Denemeyi Başlat
+                  <ArrowRight className="w-5 h-5 md:w-6 md:h-6 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </motion.div>
             </Link>
-            <Button 
-              variant="outline" 
-              className="border-2 border-white/30 bg-transparent text-white hover:bg-white/10 px-8 py-4 md:px-12 md:py-6 text-lg md:text-xl font-semibold backdrop-blur-sm"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.2 }}
             >
-              Daha Fazla Bilgi
-            </Button>
+              <Button 
+                variant="outline" 
+                className="border-2 border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-white/30 px-8 py-4 md:px-12 md:py-6 text-lg md:text-xl font-semibold backdrop-blur-sm rounded-xl transition-all duration-300"
+              >
+                Daha Fazla Bilgi
+              </Button>
+            </motion.div>
           </motion.div>
 
           {/* Trust indicators */}
@@ -249,7 +261,7 @@ export default function LandingHero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            className="mt-16 md:mt-24 pt-8 border-t border-white/20"
+            className="mt-16 md:mt-24 pt-8 border-t border-white/10"
           >
             <p className="text-white/60 text-sm md:text-base mb-6">
               Binlerce kullanıcının güvendiği platform

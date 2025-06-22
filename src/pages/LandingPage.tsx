@@ -20,7 +20,7 @@ export default function LandingPage() {
   }, [user, navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-modern">
+    <div className="min-h-screen w-full bg-gradient-modern overflow-x-hidden">
       <LandingNavbar />
       <LandingHero />
       <LandingFeatures />
