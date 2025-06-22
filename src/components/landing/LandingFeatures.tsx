@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Calendar, BarChart3, Bell, Smartphone, Shield } from 'lucide-react';
+import { Target, Calendar, BarChart3, Bell, Smartphone, Shield } from 'lucide-react';
 
 const features = [
   {
-    icon: CheckCircle,
+    icon: Target,
     title: 'Akıllı Görev Yönetimi',
     description: 'Görevlerinizi kategorilere ayırın, öncelik belirleyin ve otomatik hatırlatmalar alın.',
     color: 'from-blue-400 to-blue-600'
@@ -44,7 +44,7 @@ const features = [
 
 export default function LandingFeatures() {
   return (
-    <section className="py-20 md:py-32 relative">
+    <section id="features" className="py-20 md:py-32 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

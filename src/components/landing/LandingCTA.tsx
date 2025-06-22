@@ -63,7 +63,7 @@ export default function LandingCTA() {
               className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6"
             >
               <Link to="/register">
-                <Button className="planmaster-button group px-8 py-4 text-xl font-semibold">
+                <Button className="planmaster-button group px-8 py-4 md:px-12 md:py-6 text-xl font-semibold">
                   Ücretsiz Başla
                   <ArrowRight className="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>

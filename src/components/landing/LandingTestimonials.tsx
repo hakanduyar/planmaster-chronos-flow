@@ -1,62 +1,62 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star, Quote } from 'lucide-react';
+import { Star, MessageSquare } from 'lucide-react';
 
 const testimonials = [
   {
     name: 'Ahmet Yılmaz',
     role: 'Proje Yöneticisi',
     company: 'TechCorp',
-    content: 'PlanMaster Pro sayesinde ekibimin verimliliği %40 arttı. Artık hiçbir görev gözden kaçmıyor.',
+    content: 'Form oluşturucu inanılmaz derecede sezgisel ve güçlü. Veri toplama sürecimizi önemli ölçüde kolaylaştırdı ve sayısız saat tasarruf sağladı.',
     rating: 5,
-    avatar: 'AY'
+    avatar: 'A'
   },
   {
     name: 'Zeynep Kaya',
-    role: 'Freelancer',
+    role: 'Pazarlama Müdürü', 
     company: 'Digital Marketing',
-    content: 'Müşteri projelerimi organize etmek hiç bu kadar kolay olmamıştı. Kesinlikle tavsiye ediyorum!',
+    content: 'Şimdiye kadar kullandığım en iyi form oluşturucu. Analitik özellikleri olağanüstü ve arayüz karmaşık formları oluşturmayı çok kolay hale getiriyor.',
     rating: 5,
-    avatar: 'ZK'
+    avatar: 'Z'
   },
   {
     name: 'Mehmet Demir',
-    role: 'Startup Kurucusu',
+    role: 'Araştırma Lideri',
     company: 'InnovateTech',
-    content: 'Hem kişisel hem de iş hayatımda kullanıyorum. Hayat kurtarıcı bir uygulama gerçekten.',
+    content: 'Koşullu mantık ve hesaplama özellikleri oyunun kurallarını değiştirdi. Bu araç anket süreçlerimizi nasıl yönettiğimizi tamamen dönüştürdü.',
     rating: 5,
-    avatar: 'MD'
+    avatar: 'M'
   },
   {
     name: 'Ayşe Özkan',
-    role: 'Öğretmen',
+    role: 'Ürün Müdürü',
     company: 'Eğitim Sektörü',
-    content: 'Ders planlarımı ve öğrenci takibimi çok daha etkili yapabiliyorum. Mükemmel bir araç.',
+    content: 'Kullanım kolaylığı ve güçlü özelliklerin mükemmel birleşimi. Ekibimizin veri toplama verimliliği %300 arttı.',
     rating: 5,
-    avatar: 'AÖ'
+    avatar: 'A'
   },
   {
     name: 'Can Arslan',
     role: 'Yazılım Geliştirici',
     company: 'DevStudio',
-    content: 'Code review süreçlerinden sprint planlamaya kadar her şeyi takip ediyorum. Harika!',
+    content: 'Teknik entegrasyon çok kolay ve API dokümantasyonu mükemmel. Geliştirici deneyimi harika!',
     rating: 5,
-    avatar: 'CA'
+    avatar: 'C'
   },
   {
     name: 'Elif Şahin',
     role: 'İçerik Editörü',
     company: 'MediaHub',
-    content: 'Editorial takvimimi planlamak için vazgeçilmez oldu. Deadline\'ları kaçırmak artık tarih!',
+    content: 'Müşteri desteği olağanüstü ve ürün sürekli gelişiyor. Kesinlikle tavsiye ediyorum!',
     rating: 5,
-    avatar: 'EŞ'
+    avatar: 'E'
   }
 ];
 
 export default function LandingTestimonials() {
   return (
-    <section className="py-20 md:py-32 relative overflow-hidden">
+    <section id="testimonials" className="py-20 md:py-32 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -73,54 +73,92 @@ export default function LandingTestimonials() {
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Scrolling testimonials container */}
-          <div className="flex space-x-6 animate-scroll">
-            {[...testimonials, ...testimonials].map((testimonial, index) => (
-              <motion.div
-                key={`${testimonial.name}-${index}`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: (index % 6) * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { duration: 0.2 }
-                }}
-                className="flex-shrink-0 w-80 md:w-96"
-              >
-                <div className="glass-card p-6 md:p-8 h-full hover:border-purple-400/30 transition-all duration-300 relative">
-                  <Quote className="absolute top-4 right-4 w-8 h-8 text-purple-400/30" />
-                  
-                  {/* Rating */}
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                    ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={`${testimonial.name}-${index}`}
+              initial={{ opacity: 0, y: 30, rotate: -2 }}
+              whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -2 : 2 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ 
+                rotate: 0,
+                scale: 1.05,
+                transition: { duration: 0.3 }
+              }}
+              className="group cursor-pointer"
+            >
+              <div className="bg-white/95 backdrop-blur-sm p-6 md:p-8 rounded-2xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 relative overflow-hidden">
+                {/* Background decoration */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-bl-3xl opacity-50" />
+                
+                {/* Quote icon */}
+                <div className="absolute top-4 right-4 opacity-20">
+                  <MessageSquare className="w-8 h-8 text-purple-600" />
+                </div>
+                
+                {/* Rating */}
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+
+                {/* Content */}
+                <p className="text-gray-700 leading-relaxed mb-6 text-base md:text-lg font-medium relative z-10">
+                  "{testimonial.content}"
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-4 relative z-10">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    {testimonial.avatar}
                   </div>
-
-                  {/* Content */}
-                  <p className="text-white/90 leading-relaxed mb-6 text-lg">
-                    "{testimonial.content}"
-                  </p>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full flex items-center justify-center text-white font-bold">
-                      {testimonial.avatar}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-white">{testimonial.name}</div>
-                      <div className="text-white/70 text-sm">
-                        {testimonial.role} • {testimonial.company}
-                      </div>
+                  <div>
+                    <div className="font-bold text-gray-900 text-lg">{testimonial.name}</div>
+                    <div className="text-gray-600 text-sm">
+                      {testimonial.role} • {testimonial.company}
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+
+                {/* Hover effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
+              </div>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Additional trust indicators */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mt-16 md:mt-20"
+        >
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+            <div className="flex items-center gap-2">
+              <div className="flex -space-x-2">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold">
+                    {String.fromCharCode(65 + i)}
+                  </div>
+                ))}
+              </div>
+              <span className="text-white/80 text-sm md:text-base ml-2">1000+ Mutlu Kullanıcı</span>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <span className="text-white/80 text-sm md:text-base">4.9/5 Ortalama Puan</span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

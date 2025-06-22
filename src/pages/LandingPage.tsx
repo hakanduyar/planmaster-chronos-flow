@@ -2,6 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import LandingNavbar from '@/components/landing/LandingNavbar';
 import LandingHero from '@/components/landing/LandingHero';
 import LandingFeatures from '@/components/landing/LandingFeatures';
 import LandingTestimonials from '@/components/landing/LandingTestimonials';
@@ -20,6 +21,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-modern">
+      <LandingNavbar />
       <LandingHero />
       <LandingFeatures />
       <LandingTestimonials />
