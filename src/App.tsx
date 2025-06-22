@@ -10,6 +10,7 @@ import { SidebarProvider } from '@/components/ui/sidebar';
 import AppLayout from '@/components/layout/AppLayout';
 
 // Pages
+import LandingPage from '@/pages/LandingPage';
 import Index from '@/pages/Index';
 import Login from '@/pages/Login';
 import Register from '@/pages/Register';
@@ -39,6 +40,13 @@ function App() {
           <SidebarProvider>
             <div className="min-h-screen w-full">
               <Routes>
+                {/* Landing Page */}
+                <Route path="/welcome" element={
+                  <PublicRoute>
+                    <LandingPage />
+                  </PublicRoute>
+                } />
+
                 {/* Public Routes */}
                 <Route path="/login" element={
                   <PublicRoute>

@@ -247,6 +247,66 @@ export type Database = {
           },
         ]
       }
+      user_profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          onboarding_completed: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          onboarding_completed?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          onboarding_completed?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      weight_programs: {
+        Row: {
+          created_at: string
+          current_weight: number
+          id: string
+          program_weeks: number
+          start_date: string
+          target_weight: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_weight: number
+          id?: string
+          program_weeks: number
+          start_date?: string
+          target_weight: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          current_weight?: number
+          id?: string
+          program_weeks?: number
+          start_date?: string
+          target_weight?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

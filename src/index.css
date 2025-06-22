@@ -68,12 +68,10 @@
     @apply bg-gradient-modern text-foreground;
     height: 100%;
     font-size: 1rem;
-    overflow: hidden;
   }
 
   #root {
     height: 100%;
-    overflow: hidden;
   }
 
   /* Enhanced scrollbar styles with better visibility */
@@ -292,6 +290,25 @@
   .animate-float-slow {
     animation: float 8s ease-in-out infinite 4s;
   }
+
+  /* Scrolling testimonials animation */
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  /* Landing page specific animations */
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    background-size: 400% 400%;
+    animation: gradient 8s ease infinite;
+  }
 }
 
 @keyframes float {
@@ -303,6 +320,45 @@
   }
   66% {
     transform: translateY(10px) rotate(240deg);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
@@ -319,5 +375,16 @@
   .clickable {
     min-height: 44px;
     min-width: 44px;
+  }
+}
+
+/* Landing page specific responsive improvements */
+@media (max-width: 768px) {
+  .animate-scroll {
+    animation: scroll 40s linear infinite;
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-sm;
   }
 }
